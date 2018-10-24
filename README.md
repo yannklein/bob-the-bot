@@ -9,7 +9,7 @@
 $ git clone git@github.com:hidehiro98/line-bot-101.git
 $ cd line-bot-101
 $ bundle install
-
+$ heroku create
 ```
 
 ## Slides
