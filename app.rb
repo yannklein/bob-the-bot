@@ -1,6 +1,9 @@
 # app.rb
 require 'sinatra'
 require 'line/bot'
+require "json"
+require "ibm_watson/visual_recognition_v3"
+include IBMWatson
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -41,12 +44,23 @@ post '/callback' do
           text: event.message['text'] + ', ' + user_name
         }
         client.reply_message(event['replyToken'], message)
-      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
+
+      # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
+      when Line::Bot::Event::MessageType::Image
         response = client.get_message_content(event.message['id'])
         # tf = Tempfile.open("content")
         # tf.write(response.body)
 
-        p response.body
+        visual_recognition = VisualRecognitionV3.new(
+          version: "2018-03-19",
+          iam_apikey: ENV["IBM_IAM_API_KEY"]
+        )
+
+        classes = visual_recognition.classify(
+          images_file: response.body,
+          threshold: "0.6"
+        )
+        p JSON.pretty_generate(classes.result)
       end
     end
   }

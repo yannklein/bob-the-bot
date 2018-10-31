@@ -21,6 +21,9 @@ Example
 $ heroku config:set LINE_CHANNEL_SECRET=f73d5df3fagu3g301856e1dc4cfcf3e1
 $ heroku config:set LINE_CHANNEL_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC7SsGpHP9K1EOOYkbwRThXHdVSSupJ4TgKMEtE/LbnE2heif2GZci+ntGdP89cGfrbLiofFFBlrFygi58f/B5UsvqkvlfNM7BHddRZhhV2RgdB04t89/1O/w1cDnyilFU=
 
+Only for image recognition
+$ heroku config:set IBM_IAM_API_KEY=f73d5df3fagu3g301856e1dc4cfcf3e1
+
 $ git push heroku master
 ```
 
@@ -29,11 +32,12 @@ $ git push heroku master
 
 ## Docs
 ### Docs of LINE Messagin API
-https://developers.line.me/en/docs/messaging-api/building-sample-bot-with-heroku/
-https://github.com/line/line-bot-sdk-ruby
+- https://developers.line.me/en/docs/messaging-api/building-sample-bot-with-heroku/
+- https://github.com/line/line-bot-sdk-ruby
 
 ### Docs of Sinatra
-https://devcenter.heroku.com/articles/rack#sinatra
+- https://devcenter.heroku.com/articles/rack#sinatra
 
 ### Docs of IBM Watson
-https://console.bluemix.net/apidocs/visual-recognition?language=ruby
+- https://console.bluemix.net/apidocs/visual-recognition?language=ruby
+- https://console.bluemix.net/dashboard/apps
