@@ -51,6 +51,7 @@ post '/callback' do
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open
         tf.write(response.body)
+        p tf.path
 
         visual_recognition = VisualRecognitionV3.new(
           version: "2018-03-19",
