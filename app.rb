@@ -30,17 +30,15 @@ post '/callback' do
         case response
         when Net::HTTPSuccess then
           contact = JSON.parse(response.body)
-          p contact['displayName']
+          p contact
           user_name = contact['displayName']
-          p contact['pictureUrl']
-          p contact['statusMessage']
         else
           p "#{response.code} #{response.body}"
         end
 
         message = {
           type: 'text',
-          text: event.message['text'] + user_name
+          text: event.message['text'] + ', ' + user_name
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
