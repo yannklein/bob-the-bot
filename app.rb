@@ -3,6 +3,7 @@ require 'sinatra'
 require 'line/bot'
 require "json"
 require "ibm_watson/visual_recognition_v3"
+require 'tempfile'
 include IBMWatson
 
 def client
@@ -57,7 +58,7 @@ post '/callback' do
         )
 
         classes = visual_recognition.classify(
-          images_file: response.body,
+          images_file: Tempfile.new(response.body),
           threshold: "0.6"
         )
         p JSON.pretty_generate(classes.result)
