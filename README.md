@@ -28,6 +28,12 @@ $ git push heroku master
 
 
 ## Docs
+### Docs of LINE Messagin API
 https://developers.line.me/en/docs/messaging-api/building-sample-bot-with-heroku/
 https://github.com/line/line-bot-sdk-ruby
+
+### Docs of Sinatra
 https://devcenter.heroku.com/articles/rack#sinatra
+
+### Docs of IBM Watson
+https://console.bluemix.net/apidocs/visual-recognition?language=ruby
