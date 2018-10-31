@@ -63,8 +63,8 @@ post '/callback' do
             threshold: "0.6"
           )
           p classes.result['images'][0]['classifiers'][0]['classes']
-          puts JSON.parse(classes.result)
         end
+        tf.unlink
       end
     end
   }
