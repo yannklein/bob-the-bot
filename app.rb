@@ -62,7 +62,7 @@ post '/callback' do
             images_file: images_file,
             threshold: "0.6"
           )
-          p classes.result['images']['classifiers']['classes']
+          p classes.result['images'][0]['classifiers'][0]['classes']
           puts JSON.parse(classes.result)
         end
       end
