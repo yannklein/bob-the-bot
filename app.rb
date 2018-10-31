@@ -23,7 +23,7 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        pp event
+        p event
         user_id = event['source']['userId']
         user_name = ''
         response = client.get_profile(userId)
