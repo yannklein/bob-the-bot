@@ -22,7 +22,7 @@ $ heroku config:set LINE_CHANNEL_SECRET=f73d5df3fagu3g301856e1dc4cfcf3e1
 $ heroku config:set LINE_CHANNEL_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC7SsGpHP9K1EOOYkbwRThXHdVSSupJ4TgKMEtE/LbnE2heif2GZci+ntGdP89cGfrbLiofFFBlrFygi58f/B5UsvqkvlfNM7BHddRZhhV2RgdB04t89/1O/w1cDnyilFU=
 
 Only for image recognition
-$ heroku config:set IBM_IAM_API_KEY=f73d5df3fagu3g301856e1dc4cfcf3e1
+$ heroku config:set IBM_IAM_API_KEY=$YOUR_IAM_API_KEY
 
 $ git push heroku master
 ```
