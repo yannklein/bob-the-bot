@@ -62,6 +62,8 @@ post '/callback' do
             images_file: images_file,
             threshold: "0.6"
           )
+          p 'test'
+          p classes
           puts JSON.pretty_generate(classes.result)
         end
       end
