@@ -62,13 +62,13 @@ post '/callback' do
             images_file: images_file,
             threshold: "0.6"
           )
-          p classes.result['images'][0]['classifiers'][0]['classes']
-          message = {
-            type: 'text',
-            text: classes.result['images'][0]['classifiers'][0]['classes']
-          }
-          client.reply_message(event['replyToken'], message)
+          image_result = p classes.result['images'][0]['classifiers'][0]['classes']
         end
+        message = {
+          type: 'text',
+          text: image_result
+        }
+        client.reply_message(event['replyToken'], message)
         tf.unlink
       end
     end
