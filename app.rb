@@ -51,7 +51,7 @@ post '/callback' do
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open
         tf.write(response.body)
-        p tf.path
+        p tf.class
 
         visual_recognition = VisualRecognitionV3.new(
           version: "2018-03-19",
@@ -59,7 +59,7 @@ post '/callback' do
         )
 
         classes = visual_recognition.classify(
-          images_file: tf.path,
+          images_file: tf,
           threshold: "0.6"
         )
         p JSON.pretty_generate(classes.result)
