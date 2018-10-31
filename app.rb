@@ -57,6 +57,7 @@ post '/callback' do
           iam_apikey: ENV["IBM_IAM_API_KEY"]
         )
 
+        image_result = ''
         File.open(tf.path) do |images_file|
           classes = visual_recognition.classify(
             images_file: images_file,
