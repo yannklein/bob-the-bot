@@ -51,18 +51,19 @@ post '/callback' do
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open
         tf.write(response.body)
-        p tf.class
 
         visual_recognition = VisualRecognitionV3.new(
           version: "2018-03-19",
           iam_apikey: ENV["IBM_IAM_API_KEY"]
         )
 
-        classes = visual_recognition.classify(
-          images_file: tf,
-          threshold: "0.6"
-        )
-        p JSON.pretty_generate(classes.result)
+        File.open(tf.path) do |images_file|
+          classes = visual_recognition.classify(
+            images_file: images_file,
+            threshold: "0.6"
+          )
+          puts JSON.pretty_generate(classes.result)
+        end
       end
     end
   }
