@@ -49,8 +49,8 @@ post '/callback' do
       # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
       when Line::Bot::Event::MessageType::Image
         response = client.get_message_content(event.message['id'])
-        # tf = Tempfile.open("content")
-        # tf.write(response.body)
+        tf = Tempfile.open
+        tf.write(response.body)
 
         visual_recognition = VisualRecognitionV3.new(
           version: "2018-03-19",
@@ -58,7 +58,7 @@ post '/callback' do
         )
 
         classes = visual_recognition.classify(
-          images_file: Tempfile.new(response.body),
+          images_file: tf.path,
           threshold: "0.6"
         )
         p JSON.pretty_generate(classes.result)
