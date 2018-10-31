@@ -63,7 +63,7 @@ post '/callback' do
             images_file: images_file,
             threshold: "0.6"
           )
-          image_result = p classes.result['images'][0]['classifiers'][0]['classes']
+          image_result = p JSON.parse(classes.result['images'][0]['classifiers'][0]['classes'][0])
         end
         message = {
           type: 'text',
