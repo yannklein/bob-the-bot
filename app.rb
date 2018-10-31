@@ -23,9 +23,24 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
+
+        user_id = event.source['userId']
+        user_name = ''
+        response = client.get_profile(userId)
+        case response
+        when Net::HTTPSuccess then
+          contact = JSON.parse(response.body)
+          p contact['displayName']
+          user_name = contact['displayName']
+          p contact['pictureUrl']
+          p contact['statusMessage']
+        else
+          p "#{response.code} #{response.body}"
+        end
+
         message = {
           type: 'text',
-          text: event.message['text']
+          text: event.message['text'] + user_name
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
