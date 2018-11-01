@@ -40,11 +40,19 @@ post '/callback' do
           p "#{response.code} #{response.body}"
         end
 
-        message = {
-          type: 'text',
-          text: event.message['text'] + ', ' + user_name
-        }
-        client.reply_message(event['replyToken'], message)
+        if event.message['text'] == 'How are you?'
+          message = {
+            type: 'text',
+            text: "I'm fine, " + user_name
+          }
+          client.reply_message(event['replyToken'], message)
+        else
+          message = {
+            type: 'text',
+            text: event.message['text'] + ', ' + user_name
+          }
+          client.reply_message(event['replyToken'], message)
+        end
 
       # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
       when Line::Bot::Event::MessageType::Image
