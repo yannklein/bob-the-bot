@@ -13,6 +13,8 @@ If you do so, you cannnot create the provider nor the channel.
 $ git clone git@github.com:hidehiro98/line-bot-101.git
 $ cd line-bot-101
 $ bundle install
+
+$ brew install heroku/brew/heroku
 $ heroku create $YOUR_APP_NAME
 
 $ heroku config:set LINE_CHANNEL_SECRET=$YOUR_CHANNEL_SECRET
@@ -28,7 +30,7 @@ $ git push heroku master
 ```
 
 ## Slides
-
+https://www.slideshare.net/HidehiroNagaoka/le-wagon-tokyo-line-bot-101
 
 ## Docs
 ### Docs of LINE Messagin API
