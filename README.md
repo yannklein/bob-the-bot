@@ -1,5 +1,7 @@
 # LINE Bot 101
 
+[日本語ドキュメント](README.ja.md)
+
 ## What we use
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
 - Heroku
