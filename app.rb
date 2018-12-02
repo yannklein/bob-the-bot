@@ -102,7 +102,7 @@ post '/callback' do
         # Sending the results
         message = {
           type: 'text',
-          text: image_result
+          text: image_result.to_s
         }
 
         client.reply_message(event['replyToken'], message)
