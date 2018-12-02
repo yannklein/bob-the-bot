@@ -1,4 +1,5 @@
 # LINE Bot 101
+下記のリンク先ドキュメントに従って進めるとIBM Watson, Amazon Rekognitionを使った画像認識BOTが作れます
 
 ## Codenvy
 https://www.notion.so/Codenvy-363a45f837c241b58af5cc56bec024ba
@@ -12,14 +13,3 @@ https://qiita.com/hidehiro98/items/e71c383e789b32a4104c
 ## Amazon Rekognition
 https://paper.dropbox.com/doc/Amazon-RekognitionLINEBOT--ASxkg8u~uRyaSH6dtgdR53RcAQ-tkvkL6JKizaAP0gGcNU5t
 
-## ドキュメント
-### Docs of LINE Messagin API
-- https://developers.line.me/en/docs/messaging-api/building-sample-bot-with-heroku/
-- https://github.com/line/line-bot-sdk-ruby
-
-### Docs of Sinatra
-- https://devcenter.heroku.com/articles/rack#sinatra
-
-### Docs of IBM Watson
-- https://console.bluemix.net/apidocs/visual-recognition?language=ruby
-- https://console.bluemix.net/dashboard/apps

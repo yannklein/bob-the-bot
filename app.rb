@@ -1,9 +1,11 @@
 # app.rb
 require 'sinatra'
-require 'line/bot'
 require "json"
-require "ibm_watson/visual_recognition_v3"
 require 'tempfile'
+require 'line/bot'
+require "ibm_watson/visual_recognition_v3"
+require 'aws-sdk'
+
 include IBMWatson
 
 def client
@@ -52,23 +54,49 @@ post '/callback' do
         tf = Tempfile.open
         tf.write(response.body)
 
-        visual_recognition = VisualRecognitionV3.new(
-          version: "2018-03-19",
-          iam_apikey: ENV["IBM_IAM_API_KEY"]
+        # Using IBM Watson
+        # visual_recognition = VisualRecognitionV3.new(
+        #   version: "2018-03-19",
+        #   iam_apikey: ENV["IBM_IAM_API_KEY"]
+        # )
+
+        # image_result = ''
+        # File.open(tf.path) do |images_file|
+        #   classes = visual_recognition.classify(
+        #     images_file: images_file,
+        #     threshold: "0.6"
+        #   )
+        #   image_result = p classes.result['images'][0]['classifiers'][0]['classes'].to_s
+        # end
+
+        # Using Amazon Rekogition
+
+        Aws.config.update({
+          region: 'ap-northeast-1',
+          credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+        })
+
+        rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
+
+        response_detect_labels = rekognition.detect_labels(
+          image: { bytes: File.read(tf.path) }
         )
 
-        image_result = ''
-        File.open(tf.path) do |images_file|
-          classes = visual_recognition.classify(
-            images_file: images_file,
-            threshold: "0.6"
-          )
-          image_result = p classes.result['images'][0]['classifiers'][0]['classes'].to_s
+        response_detect_labels.labels.each do |label|
+          p " #{label.name} #{label.confidence.to_i}"
         end
+
+        image_result = {}
+        response_detect_labels.labels.each do |label|
+          image_result[label.name] = label.confidence.to_i
+        end
+
+        # Sending the results
         message = {
           type: 'text',
           text: image_result
         }
+
         client.reply_message(event['replyToken'], message)
         tf.unlink
       end
