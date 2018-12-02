@@ -1,6 +1,9 @@
 # LINE Bot 101
 下記のリンク先ドキュメントに従って進めるとIBM Watson, Amazon Rekognitionを使った画像認識BOTが作れます
 
+## Heroku
+https://scrapbox.io/xhack-ttl-workshops/Heroku%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9
+
 ## Codenvy
 https://www.notion.so/Codenvy-363a45f837c241b58af5cc56bec024ba
 
