@@ -135,7 +135,7 @@ post '/callback' do
         )
 
         image_result = {}
-        vision.annotate_image(request).responses[0].label_annotations.each do |entity|
+        cloud_vision.annotate_image(request).responses[0].label_annotations.each do |entity|
           puts entity.description, entity.score
           image_result[entity.description] = entity.score
         end
