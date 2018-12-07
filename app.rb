@@ -2,9 +2,11 @@
 require 'sinatra'
 require "json"
 require 'tempfile'
+
 require 'line/bot'
 require "ibm_watson/visual_recognition_v3"
 require 'aws-sdk'
+require 'google/apis/vision_v1'
 
 include IBMWatson
 
@@ -78,36 +80,65 @@ post '/callback' do
         # end
 
         # Using Amazon Rekogition
-
-        Aws.config.update({
-          region: 'ap-northeast-1',
-          credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
-        })
-
-        rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
-
-        response_detect_labels = rekognition.detect_labels(
-          image: { bytes: File.read(tf.path) }
-        )
-
-        response_detect_labels.labels.each do |label|
-          p " #{label.name} #{label.confidence.to_i}"
-        end
-
-        image_result = {}
-        response_detect_labels.labels.each do |label|
-          image_result[label.name] = label.confidence.to_i
-        end
-
-        # TODO: Fix bug that when no face is detected, it does not return result
-        # response_detect_faces = rekognition.detect_faces({
-        #   image: { bytes: File.read(tf.path) },
-        #   attributes: ['ALL']
+        # Aws.config.update({
+        #   region: 'ap-northeast-1',
+        #   credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
         # })
 
-        # response_detect_faces.face_details[0].emotions.each do |emotion|
-        #   image_result[emotion.type] = emotion.confidence.to_i.to_s
+        # rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
+
+        # response_detect_labels = rekognition.detect_labels(
+        #   image: { bytes: File.read(tf.path) }
+        # )
+
+        # response_detect_labels.labels.each do |label|
+        #   p " #{label.name} #{label.confidence.to_i}"
         # end
+
+        # image_result = {}
+        # response_detect_labels.labels.each do |label|
+        #   image_result[label.name] = label.confidence.to_i
+        # end
+
+        # # TODO: Fix bug that when no face is detected, it does not return result
+        # # response_detect_faces = rekognition.detect_faces({
+        # #   image: { bytes: File.read(tf.path) },
+        # #   attributes: ['ALL']
+        # # })
+
+        # # response_detect_faces.face_details[0].emotions.each do |emotion|
+        # #   image_result[emotion.type] = emotion.confidence.to_i.to_s
+        # # end
+
+        # Cloud Vision API | Google Cloud
+        cloud_vision = Google::Apis::VisionV1::VisionService.new
+        cloud_vision.key = ENV["GOOGLE_CLOUD_VISION_API_KEY"]
+
+        request = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+          requests: [
+            {
+              image:{
+                content: File.read("images/apple.jpg")
+              },
+              features: [
+                {
+                  type: "LABEL_DETECTION",
+                  maxResults: 3
+                },
+                {
+                  type: "IMAGE_PROPERTIES",
+                  maxResults: 3
+                }
+              ]
+            }
+          ]
+        )
+
+        image_result = {}
+        vision.annotate_image(request).responses[0].label_annotations.each do |entity|
+          puts entity.description, entity.score
+          image_result[entity.description] = entity.score
+        end
 
         # Sending the results
         message = {
