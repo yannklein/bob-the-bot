@@ -16,3 +16,5 @@ https://qiita.com/hidehiro98/items/e71c383e789b32a4104c
 ## Amazon Rekognition
 https://paper.dropbox.com/doc/Amazon-RekognitionLINEBOT--ASxkg8u~uRyaSH6dtgdR53RcAQ-tkvkL6JKizaAP0gGcNU5t
 
+## Cloud Vision API | Google Cloud
+https://paper.dropbox.com/doc/Google-Cloud-LINEBOT--ATJZwQyGS3GIp1aCQBLhIh5uAQ-Ca0HKBej3ZfAFQLTBiGU3
