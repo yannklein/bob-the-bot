@@ -118,7 +118,7 @@ post '/callback' do
           requests: [
             {
               image:{
-                content: File.read("images/apple.jpg")
+                content: File.read(tf.path)
               },
               features: [
                 {
