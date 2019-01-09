@@ -169,7 +169,7 @@ post '/callback' do
         }.to_json
 
         # req["Content-Type"] = "application/octet-stream"
-        req["Content-Type"] = "application/multipart/form-data"
+        req["Content-Type"] = "multipart/form-data"
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         req["qs"] = params
 
