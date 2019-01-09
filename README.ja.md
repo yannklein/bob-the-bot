@@ -18,3 +18,6 @@ https://paper.dropbox.com/doc/Amazon-RekognitionLINEBOT--ASxkg8u~uRyaSH6dtgdR53R
 
 ## Cloud Vision API | Google Cloud
 https://paper.dropbox.com/doc/Google-Cloud-LINEBOT--ATJZwQyGS3GIp1aCQBLhIh5uAQ-Ca0HKBej3ZfAFQLTBiGU3
+
+## Microsoft Azure
+https://www.notion.so/xhackttl/Microsoft-Azure-LINE-BOT-de8eeb29f511400eb0fc2fbd30f1dec7

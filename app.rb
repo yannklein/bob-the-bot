@@ -111,28 +111,30 @@ post '/callback' do
         # # end
 
         # Cloud Vision API | Google Cloud
-        cloud_vision = Google::Apis::VisionV1::VisionService.new
-        cloud_vision.key = ENV["GOOGLE_CLOUD_VISION_API_KEY"]
+        # cloud_vision = Google::Apis::VisionV1::VisionService.new
+        # cloud_vision.key = ENV["GOOGLE_CLOUD_VISION_API_KEY"]
 
-        request = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-          requests: [
-            {
-              image:{
-                content: File.read(tf.path)
-              },
-              features: [
-                {
-                  type: "LABEL_DETECTION",
-                  maxResults: 3
-                },
-                {
-                  type: "IMAGE_PROPERTIES",
-                  maxResults: 3
-                }
-              ]
-            }
-          ]
-        )
+        # request = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+        #   requests: [
+        #     {
+        #       image:{
+        #         content: File.read(tf.path)
+        #       },
+        #       features: [
+        #         {
+        #           type: "LABEL_DETECTION",
+        #           maxResults: 3
+        #         },
+        #         {
+        #           type: "IMAGE_PROPERTIES",
+        #           maxResults: 3
+        #         }
+        #       ]
+        #     }
+        #   ]
+        # )
+
+        # Microsoft Azure Computer Vision
 
         image_result = {}
         cloud_vision.annotate_image(request).responses[0].label_annotations.each do |entity|
