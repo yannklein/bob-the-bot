@@ -165,18 +165,19 @@ post '/callback' do
         params = {
           'visualFeatures': 'Categories,Description,Color',
           'details': '',
-          'language': 'ja'
+          'language': 'en'
         }.to_json
 
-        req["Content-Type"] = "application/octet-stream"
+        # req["Content-Type"] = "application/octet-stream"
+        req["Content-Type"] = "application/multipart/form-data"
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         req["qs"] = params
 
         image_result = ''
         File.open(tf.path) do |images_file|
-          # req.body = images_file
-          post_data = URI.encode_www_form(images_file)
-          res = https.request(req, post_data)
+          req.body = images_file
+          # post_data = URI.encode_www_form(images_file)
+          res = https.request(req)
           image_result = res.body
         end
 
