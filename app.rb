@@ -166,7 +166,7 @@ post "/callback" do
         }
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
-        req["qs"] = params
+        # req["qs"] = params
 
         image_result = ""
         File.open(tf.path) do |image_file|
