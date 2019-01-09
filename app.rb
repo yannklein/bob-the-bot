@@ -49,7 +49,7 @@ post "/callback" do
         if event.message["text"] == "How are you?"
           message = {
             type: "text",
-            text: "I"m fine, " + user_name
+            text: "I am fine, " + user_name
           }
           client.reply_message(event["replyToken"], message)
         else
