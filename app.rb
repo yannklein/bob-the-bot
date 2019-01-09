@@ -81,6 +81,7 @@ post '/callback' do
         #   image_result = p classes.result['images'][0]['classifiers'][0]['classes'].to_s
         # end
 
+
         # Using Amazon Rekogition
         # Aws.config.update({
         #   region: 'ap-northeast-1',
@@ -112,7 +113,8 @@ post '/callback' do
         # #   image_result[emotion.type] = emotion.confidence.to_i.to_s
         # # end
 
-        # Cloud Vision API | Google Cloud
+
+        # Using Cloud Vision API | Google Cloud
         # cloud_vision = Google::Apis::VisionV1::VisionService.new
         # cloud_vision.key = ENV["GOOGLE_CLOUD_VISION_API_KEY"]
 
@@ -143,7 +145,7 @@ post '/callback' do
         # end
 
 
-        # Microsoft Azure Congnitive Sevices Computer Vision
+        # Using Microsoft Azure Congnitive Sevices Computer Vision
         # You must use the same location in your REST call as you used to get your
         # subscription keys. For example, if you got your subscription keys from
         # westus, replace "westcentralus" in the URL below with "westus".
@@ -152,9 +154,6 @@ post '/callback' do
 
         image_url =
         'https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg'
-
-        # Replace <Subscription Key> with your valid subscription key.
-        subscription_key = '3459157aedf14c36b27121ea438c36aa'
 
         uri = URI.parse(uri_base)
         https = Net::HTTP.new(uri.host, uri.port)
@@ -170,13 +169,14 @@ post '/callback' do
         }.to_json
 
         req["Content-Type"] = "application/octet-stream"
-        req["Ocp-Apim-Subscription-Key"] = subscription_key
+        req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         req["qs"] = params
 
         image_result = ''
         File.open(tf.path) do |images_file|
-          req.body = images_file
-          res = https.request(req)
+          # req.body = images_file
+          post_data = URI.encode_www_form(images_file)
+          res = https.request(req, post_data)
           image_result = res.body
         end
 
