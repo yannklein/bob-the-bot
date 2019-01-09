@@ -156,7 +156,7 @@ post "/callback" do
         https = Net::HTTP.new(uri.host, uri.port)
 
         https.use_ssl = true
-        req = Net::HTTP::Post.new(uri.request_uri + "?visualFeatures=Categories,Description,Color&details=Celebrities")
+        req = Net::HTTP::Post.new(uri.request_uri + "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
 
         # Request parameters.
         # params = {
@@ -173,7 +173,7 @@ post "/callback" do
           data = [["image_file", image_file]]
           req.set_form(data, "multipart/form-data")
           res = https.request(req)
-          image_result = res.body
+          image_result = res.body.force_encoding('UTF-8')
         end
 
         # Sending the results
