@@ -159,11 +159,11 @@ post "/callback" do
         req = Net::HTTP::Post.new(uri.request_uri + "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
 
         # Request parameters.
-        params = {
-          "visualFeatures": "Categories,Description,Color",
-          "details": "Celebrities",
-          "language": "en"
-        }
+        # params = {
+        #   "visualFeatures": "Categories,Description,Color",
+        #   "details": "Celebrities",
+        #   "language": "en"
+        # }
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         # req["qs"] = params
