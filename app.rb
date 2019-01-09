@@ -1,14 +1,14 @@
 # app.rb
-require 'sinatra'
-require 'json'
-require 'net/http'
-require 'uri'
-require 'tempfile'
+require "sinatra"
+require "json"
+require "net/http"
+require "uri"
+require "tempfile"
 
-require 'line/bot'
-require 'ibm_watson/visual_recognition_v3'
-require 'aws-sdk'
-require 'google/apis/vision_v1'
+require "line/bot"
+require "ibm_watson/visual_recognition_v3"
+require "aws-sdk"
+require "google/apis/vision_v1"
 
 include IBMWatson
 
@@ -19,12 +19,12 @@ def client
   }
 end
 
-post '/callback' do
+post "/callback" do
   body = request.body.read
 
-  signature = request.env['HTTP_X_LINE_SIGNATURE']
+  signature = request.env["HTTP_X_LINE_SIGNATURE"]
   unless client.validate_signature(body, signature)
-    error 400 do 'Bad Request' end
+    error 400 do "Bad Request" end
   end
 
   events = client.parse_events_from(body)
@@ -34,35 +34,35 @@ post '/callback' do
       case event.type
       when Line::Bot::Event::MessageType::Text
         p event
-        user_id = event['source']['userId']
-        user_name = ''
+        user_id = event["source"]["userId"]
+        user_name = ""
         response = client.get_profile(user_id)
         case response
         when Net::HTTPSuccess then
           contact = JSON.parse(response.body)
           p contact
-          user_name = contact['displayName']
+          user_name = contact["displayName"]
         else
           p "#{response.code} #{response.body}"
         end
 
-        if event.message['text'] == 'How are you?'
+        if event.message["text"] == "How are you?"
           message = {
-            type: 'text',
-            text: "I'm fine, " + user_name
+            type: "text",
+            text: "I"m fine, " + user_name
           }
-          client.reply_message(event['replyToken'], message)
+          client.reply_message(event["replyToken"], message)
         else
           message = {
-            type: 'text',
-            text: event.message['text'] + ', ' + user_name
+            type: "text",
+            text: event.message["text"] + ", " + user_name
           }
-          client.reply_message(event['replyToken'], message)
+          client.reply_message(event["replyToken"], message)
         end
 
       # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
       when Line::Bot::Event::MessageType::Image
-        response_image = client.get_message_content(event.message['id'])
+        response_image = client.get_message_content(event.message["id"])
         tf = Tempfile.open
         tf.write(response_image.body)
 
@@ -72,20 +72,20 @@ post '/callback' do
         #   iam_apikey: ENV["IBM_IAM_API_KEY"]
         # )
 
-        # image_result = ''
+        # image_result = ""
         # File.open(tf.path) do |images_file|
         #   classes = visual_recognition.classify(
         #     images_file: images_file,
         #     threshold: "0.6"
         #   )
-        #   image_result = p classes.result['images'][0]['classifiers'][0]['classes'].to_s
+        #   image_result = p classes.result["images"][0]["classifiers"][0]["classes"].to_s
         # end
 
 
         # Using Amazon Rekogition
         # Aws.config.update({
-        #   region: 'ap-northeast-1',
-        #   credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+        #   region: "ap-northeast-1",
+        #   credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"])
         # })
 
         # rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
@@ -106,7 +106,7 @@ post '/callback' do
         # # TODO: Fix bug that when no face is detected, it does not return result
         # # response_detect_faces = rekognition.detect_faces({
         # #   image: { bytes: File.read(tf.path) },
-        # #   attributes: ['ALL']
+        # #   attributes: ["ALL"]
         # # })
 
         # # response_detect_faces.face_details[0].emotions.each do |emotion|
@@ -150,7 +150,7 @@ post '/callback' do
         # subscription keys. For example, if you got your subscription keys from
         # westus, replace "westcentralus" in the URL below with "westus".
         uri_base =
-        'https://japaneast.api.cognitive.microsoft.com/vision/v2.0/analyze'
+        "https://japaneast.api.cognitive.microsoft.com/vision/v2.0/analyze"
 
         uri = URI.parse(uri_base)
         https = Net::HTTP.new(uri.host, uri.port)
@@ -160,17 +160,17 @@ post '/callback' do
 
         # Request parameters.
         params = {
-          'visualFeatures': 'Categories,Description,Color',
-          'details': 'Celebrities',
-          'language': 'en'
+          "visualFeatures": "Categories,Description,Color",
+          "details": "Celebrities",
+          "language": "en"
         }.to_json
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         req["qs"] = params
 
-        image_result = ''
+        image_result = ""
         File.open(tf.path) do |image_file|
-          data = [['image_file', image_file]]
+          data = [["image_file", image_file]]
           req.set_form(data, "multipart/form-data")
           res = https.request(req)
           image_result = res.body
@@ -178,11 +178,11 @@ post '/callback' do
 
         # Sending the results
         message = {
-          type: 'text',
+          type: "text",
           text: image_result.to_s
         }
 
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event["replyToken"], message)
         tf.unlink
       end
     end
