@@ -156,7 +156,7 @@ post "/callback" do
         https = Net::HTTP.new(uri.host, uri.port)
 
         https.use_ssl = true
-        req = Net::HTTP::Post.new(uri.request_uri)
+        req = Net::HTTP::Post.new(uri.request_uri + "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
 
         # Request parameters.
         params = {
