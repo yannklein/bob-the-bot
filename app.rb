@@ -152,9 +152,6 @@ post '/callback' do
         uri_base =
         'https://japaneast.api.cognitive.microsoft.com/vision/v2.0/analyze'
 
-        image_url =
-        'https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg'
-
         uri = URI.parse(uri_base)
         https = Net::HTTP.new(uri.host, uri.port)
 
@@ -164,7 +161,7 @@ post '/callback' do
         # Request parameters.
         params = {
           'visualFeatures': 'Categories,Description,Color',
-          'details': '',
+          'details': 'Celebrities',
           'language': 'en'
         }.to_json
 
@@ -173,8 +170,6 @@ post '/callback' do
 
         image_result = ''
         File.open(tf.path) do |image_file|
-          # req.body = image_file
-          # post_data = URI.encode_www_form(image_file)
           data = [['image_file', image_file]]
           req.set_form(data, "multipart/form-data")
           res = https.request(req)
