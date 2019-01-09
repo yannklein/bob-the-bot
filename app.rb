@@ -163,7 +163,7 @@ post "/callback" do
           "visualFeatures": "Categories,Description,Color",
           "details": "Celebrities",
           "language": "en"
-        }.to_json
+        }
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
         req["qs"] = params
