@@ -62,9 +62,9 @@ post '/callback' do
 
       # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
       when Line::Bot::Event::MessageType::Image
-        response = client.get_message_content(event.message['id'])
+        response_image = client.get_message_content(event.message['id'])
         tf = Tempfile.open
-        tf.write(response.body)
+        tf.write(response_image.body)
 
         # Using IBM Watson
         # visual_recognition = VisualRecognitionV3.new(
@@ -169,12 +169,16 @@ post '/callback' do
           'language': 'ja'
         }.to_json
 
-        req.body = "{'url': '#{image_url}'}"
-        req["Content-Type"] = "application/json"
+        req["Content-Type"] = "application/octet-stream"
         req["Ocp-Apim-Subscription-Key"] = subscription_key
         req["qs"] = params
-        res = https.request(req)
-        image_result = res.body
+
+        image_result = ''
+        File.open(tf.path) do |images_file|
+          req.body = images_file
+          res = https.request(req)
+          image_result = res.body
+        end
 
         # Sending the results
         message = {
