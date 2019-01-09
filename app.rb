@@ -175,9 +175,9 @@ post '/callback' do
 
         image_result = ''
         File.open(tf.path) do |images_file|
-          req.body = images_file
-          # post_data = URI.encode_www_form(images_file)
-          res = https.request(req)
+          # req.body = images_file
+          post_data = URI.encode_www_form(images_file)
+          res = https.request(req, post_data)
           image_result = res.body
         end
 
