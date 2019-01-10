@@ -157,9 +157,7 @@ post "/callback" do
 
         https.use_ssl = true
         req = Net::HTTP::Post.new(uri.request_uri +
-          "?visualFeatures=Categories,Description,Color
-          &details=Celebrities
-          &language=ja")
+          "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
 
