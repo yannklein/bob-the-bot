@@ -15,7 +15,7 @@ include IBMWatson
 def client
   @client ||= Line::Bot::Client.new { |config|
     config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-    config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    config.channel_token = ENV["LINE_ACCESS_TOKEN"]
   }
 end
 
@@ -156,23 +156,20 @@ post "/callback" do
         https = Net::HTTP.new(uri.host, uri.port)
 
         https.use_ssl = true
-        req = Net::HTTP::Post.new(uri.request_uri + "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
-
-        # Request parameters.
-        # params = {
-        #   "visualFeatures": "Categories,Description,Color",
-        #   "details": "Celebrities",
-        #   "language": "en"
-        # }
+        req = Net::HTTP::Post.new(uri.request_uri +
+          "?visualFeatures=Categories,Description,Color
+          &details=Celebrities
+          &language=ja")
 
         req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
-        # req["qs"] = params
 
         image_result = ""
         File.open(tf.path) do |image_file|
           data = [["image_file", image_file]]
           req.set_form(data, "multipart/form-data")
           res = https.request(req)
+
+          # Azureからのレスポンスが ASCII-8BIT なので UTF-8 にエンコードする
           image_result = res.body.force_encoding('UTF-8')
         end
 
