@@ -103,15 +103,16 @@ post "/callback" do
           image_result[label.name] = label.confidence.to_i
         end
 
-        # # TODO: Fix bug that when no face is detected, it does not return result
-        # # response_detect_faces = rekognition.detect_faces({
-        # #   image: { bytes: File.read(tf.path) },
-        # #   attributes: ["ALL"]
-        # # })
+        response_detect_faces = rekognition.detect_faces({
+          image: { bytes: File.read(tf.path) },
+          attributes: ["ALL"]
+        })
 
-        # # response_detect_faces.face_details[0].emotions.each do |emotion|
-        # #   image_result[emotion.type] = emotion.confidence.to_i.to_s
-        # # end
+        if response_detect_faces.face_details[0]
+          response_detect_faces.face_details[0].emotions.each do |emotion|
+            image_result[emotion.type] = emotion.confidence.to_i.to_s
+          end
+        end
 
 
         # Using Cloud Vision API | Google Cloud
