@@ -112,6 +112,9 @@ post "/callback" do
           response_detect_faces.face_details[0].emotions.each do |emotion|
             image_result[emotion.type] = emotion.confidence.to_i.to_s
           end
+          value = response_detect_faces.face_details[0].eyes_open.value
+          confidence = response_detect_faces.face_details[0].eyes_open.confidence
+          image_result['eyes_open'] = "#{value}, #{confidence}"
         end
 
 
