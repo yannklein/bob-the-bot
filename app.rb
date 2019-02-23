@@ -83,39 +83,39 @@ post "/callback" do
 
 
         # Using Amazon Rekogition
-        Aws.config.update({
-          region: "ap-northeast-1",
-          credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"])
-        })
+        # Aws.config.update({
+        #   region: "ap-northeast-1",
+        #   credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"])
+        # })
 
-        rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
+        # rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
 
-        response_detect_labels = rekognition.detect_labels(
-          image: { bytes: File.read(tf.path) }
-        )
+        # response_detect_labels = rekognition.detect_labels(
+        #   image: { bytes: File.read(tf.path) }
+        # )
 
-        response_detect_labels.labels.each do |label|
-          p " #{label.name} #{label.confidence.to_i}"
-        end
+        # response_detect_labels.labels.each do |label|
+        #   p " #{label.name} #{label.confidence.to_i}"
+        # end
 
-        image_result = {}
-        response_detect_labels.labels.each do |label|
-          image_result[label.name] = label.confidence.to_i
-        end
+        # image_result = {}
+        # response_detect_labels.labels.each do |label|
+        #   image_result[label.name] = label.confidence.to_i
+        # end
 
-        response_detect_faces = rekognition.detect_faces({
-          image: { bytes: File.read(tf.path) },
-          attributes: ["ALL"]
-        })
+        # response_detect_faces = rekognition.detect_faces({
+        #   image: { bytes: File.read(tf.path) },
+        #   attributes: ["ALL"]
+        # })
 
-        if response_detect_faces.face_details[0]
-          response_detect_faces.face_details[0].emotions.each do |emotion|
-            image_result[emotion.type] = emotion.confidence.to_i.to_s
-          end
-          value = response_detect_faces.face_details[0].eyes_open.value
-          confidence = response_detect_faces.face_details[0].eyes_open.confidence
-          image_result['eyes_open'] = "#{value}, #{confidence}"
-        end
+        # if response_detect_faces.face_details[0]
+        #   response_detect_faces.face_details[0].emotions.each do |emotion|
+        #     image_result[emotion.type] = emotion.confidence.to_i.to_s
+        #   end
+        #   value = response_detect_faces.face_details[0].eyes_open.value
+        #   confidence = response_detect_faces.face_details[0].eyes_open.confidence
+        #   image_result['eyes_open'] = "#{value}, #{confidence}"
+        # end
 
 
         # Using Cloud Vision API | Google Cloud
@@ -150,30 +150,30 @@ post "/callback" do
 
 
         # Using Microsoft Azure Congnitive Sevices Computer Vision
-        # # You must use the same location in your REST call as you used to get your
-        # # subscription keys. For example, if you got your subscription keys from
-        # # westus, replace "westcentralus" in the URL below with "westus".
-        # uri_base =
-        # "https://japaneast.api.cognitive.microsoft.com/vision/v2.0/analyze"
+        # You must use the same location in your REST call as you used to get your
+        # subscription keys. For example, if you got your subscription keys from
+        # westus, replace "westcentralus" in the URL below with "westus".
+        uri_base =
+        "https://japaneast.api.cognitive.microsoft.com/vision/v2.0/analyze"
 
-        # uri = URI.parse(uri_base)
-        # https = Net::HTTP.new(uri.host, uri.port)
+        uri = URI.parse(uri_base)
+        https = Net::HTTP.new(uri.host, uri.port)
 
-        # https.use_ssl = true
-        # req = Net::HTTP::Post.new(uri.request_uri +
-        #   "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
+        https.use_ssl = true
+        req = Net::HTTP::Post.new(uri.request_uri +
+          "?visualFeatures=Categories,Description,Color&details=Celebrities&language=ja")
 
-        # req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
+        req["Ocp-Apim-Subscription-Key"] = ENV["AZURE_KEY"]
 
-        # image_result = ""
-        # File.open(tf.path) do |image_file|
-        #   data = [["image_file", image_file]]
-        #   req.set_form(data, "multipart/form-data")
-        #   res = https.request(req)
+        image_result = ""
+        File.open(tf.path) do |image_file|
+          data = [["image_file", image_file]]
+          req.set_form(data, "multipart/form-data")
+          res = https.request(req)
 
-        #   # Azureからのレスポンスが ASCII-8BIT なので UTF-8 にエンコードする
-        #   image_result = res.body.force_encoding('UTF-8')
-        # end
+          # Azureからのレスポンスが ASCII-8BIT なので UTF-8 にエンコードする
+          image_result = res.body.force_encoding('UTF-8')
+        end
 
         # Sending the results
         message = {
