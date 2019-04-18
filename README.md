@@ -15,7 +15,14 @@ If you do so, you cannnot create the provider nor the channel.
 $ git clone https://github.com/hidehiro98/line-bot-101.git
 $ cd line-bot-101
 $ git remote add heroku https://git.heroku.com/YOUR-APP-NAME-ON-HEROKU.git
-$ npm install -g heroku
+
+If you don't have brew
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Then
+$ brew install heroku/brew/heroku
+
+
+$
 $ git push heroku master
 
 Please ignore these lines
