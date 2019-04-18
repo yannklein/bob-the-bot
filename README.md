@@ -14,7 +14,6 @@ If you do so, you cannnot create the provider nor the channel.
 ```
 $ git clone https://github.com/hidehiro98/line-bot-101.git
 $ cd line-bot-101
-$ bundle install
 
 $ brew install heroku/brew/heroku
 $ heroku create $YOUR_APP_NAME
