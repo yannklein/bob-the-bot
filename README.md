@@ -12,7 +12,7 @@ If you do so, you cannnot create the provider nor the channel.
 
 ## Installation
 ```
-$ git clone git@github.com:hidehiro98/line-bot-101.git
+$ git clone https://github.com/hidehiro98/line-bot-101.git
 $ cd line-bot-101
 $ bundle install
 
