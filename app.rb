@@ -36,7 +36,7 @@ post "/callback" do
         p event
         user_id = event["source"]["userId"]
         user_name = ""
-        response = client.get_profile(user_id)
+        # response = client.get_profile(user_id)
         case response
         when Net::HTTPSuccess then
           contact = JSON.parse(response.body)
