@@ -37,15 +37,15 @@ post "/callback" do
         user_id = event["source"]["userId"]
         user_name = ""
 
-        # response = client.get_profile(user_id)
-        # case response
-        # when Net::HTTPSuccess then
-        #   contact = JSON.parse(response.body)
-        #   p contact
-        #   user_name = contact["displayName"]
-        # else
-          # p "#{response.code} #{response.body}"
-        # end
+        response = client.get_profile(user_id)
+        case response
+        when Net::HTTPSuccess then
+          contact = JSON.parse(response.body)
+          p contact
+          user_name = contact["displayName"]
+        else
+          p "#{response.code} #{response.body}"
+        end
 
         if event.message["text"] == "How are you?"
           message = {
