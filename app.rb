@@ -59,6 +59,8 @@ post "/callback" do
             text: event.message["text"] + ", " + user_name
           }
           p 'Im here!'
+          p event["replyToken"]
+          p message
           client.reply_message(event["replyToken"], message)
         end
 
