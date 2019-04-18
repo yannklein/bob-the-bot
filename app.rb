@@ -53,6 +53,12 @@ post "/callback" do
             text: "I am fine, " + user_name
           }
           client.reply_message(event["replyToken"], message)
+        elsif event.message["text"].end_with?('?')
+          message = {
+            type: "text",
+            text: "Good question, " + user_name + "!"
+          }
+          client.reply_message(event["replyToken"], message)
         else
           message = {
             type: "text",
