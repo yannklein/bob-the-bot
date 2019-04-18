@@ -61,6 +61,7 @@ post "/callback" do
           p 'Im here!'
           p event["replyToken"]
           p message
+          p client
           client.reply_message(event["replyToken"], message)
         end
 
