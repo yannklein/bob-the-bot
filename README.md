@@ -16,13 +16,15 @@ $ git clone https://github.com/hidehiro98/line-bot-101.git
 $ cd line-bot-101
 $ git remote add heroku https://git.heroku.com/YOUR-APP-NAME-ON-HEROKU.git
 
+macOS
 If you don't have brew
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 Then
 $ brew install heroku/brew/heroku
 
+Ubuntu
+$ sudo snap install --classic heroku
 
-$
 $ git push heroku master
 
 Please ignore these lines
