@@ -93,40 +93,40 @@ post "/callback" do
         end
 
 
-        Using Amazon Rekogition
-        Aws.config.update({
-          region: "ap-northeast-1",
-          credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"])
-        })
+        # Using Amazon Rekogition
+        # Aws.config.update({
+        #   region: "ap-northeast-1",
+        #   credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"])
+        # })
 
-        rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
+        # rekognition = Aws::Rekognition::Client.new(region: Aws.config[:region], credentials: Aws.config[:credentials])
 
-        response_detect_labels = rekognition.detect_labels(
-          image: { bytes: File.read(tf.path) }
-        )
+        # response_detect_labels = rekognition.detect_labels(
+        #   image: { bytes: File.read(tf.path) }
+        # )
 
-        response_detect_labels.labels.each do |label|
-          p " #{label.name} #{label.confidence.to_i}"
-        end
+        # response_detect_labels.labels.each do |label|
+        #   p " #{label.name} #{label.confidence.to_i}"
+        # end
 
-        image_result = {}
-        response_detect_labels.labels.each do |label|
-          image_result[label.name] = label.confidence.to_i
-        end
+        # image_result = {}
+        # response_detect_labels.labels.each do |label|
+        #   image_result[label.name] = label.confidence.to_i
+        # end
 
-        response_detect_faces = rekognition.detect_faces({
-          image: { bytes: File.read(tf.path) },
-          attributes: ["ALL"]
-        })
+        # response_detect_faces = rekognition.detect_faces({
+        #   image: { bytes: File.read(tf.path) },
+        #   attributes: ["ALL"]
+        # })
 
-        if response_detect_faces.face_details[0]
-          response_detect_faces.face_details[0].emotions.each do |emotion|
-            image_result[emotion.type] = emotion.confidence.to_i.to_s
-          end
-          value = response_detect_faces.face_details[0].eyes_open.value
-          confidence = response_detect_faces.face_details[0].eyes_open.confidence
-          image_result['eyes_open'] = "#{value}, #{confidence}"
-        end
+        # if response_detect_faces.face_details[0]
+        #   response_detect_faces.face_details[0].emotions.each do |emotion|
+        #     image_result[emotion.type] = emotion.confidence.to_i.to_s
+        #   end
+        #   value = response_detect_faces.face_details[0].eyes_open.value
+        #   confidence = response_detect_faces.face_details[0].eyes_open.confidence
+        #   image_result['eyes_open'] = "#{value}, #{confidence}"
+        # end
 
 
         # Using Cloud Vision API | Google Cloud
@@ -187,13 +187,13 @@ post "/callback" do
         # end
 
         # # Sending the results
-        # message = {
-        #   type: "text",
-        #   text: image_result.to_s
-        # }
+        message = {
+          type: "text",
+          text: image_result.to_s
+        }
 
-        # client.reply_message(event["replyToken"], message)
-        # tf.unlink
+        client.reply_message(event["replyToken"], message)
+        tf.unlink
       end
     end
   }
