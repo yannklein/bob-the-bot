@@ -47,7 +47,13 @@ post "/callback" do
           p "#{response.code} #{response.body}"
         end
 
-        if event.message["text"].match?(/how\s+.*are\s+.*you.*/i)
+        if event.message["text"].match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello)/i)
+          message = {
+            type: "text",
+            text: "I am fine, " + user_name
+          }
+          client.reply_message(event["replyToken"], message)
+        elsif event.message["text"].match?(/how\s+.*are\s+.*you.*/i)
           message = {
             type: "text",
             text: "I am fine, " + user_name
