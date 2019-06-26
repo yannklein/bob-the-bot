@@ -17,7 +17,7 @@ def client
   }
 end
 
-def bot_answer_to(a_question)
+def bot_answer_to(a_question, user_name)
   if a_question.match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello).*/i)
     "Hello " + user_name + ", how are you doing today?"
   elsif a_question.match?(/how\s+.*are\s+.*you.*/i)
@@ -63,7 +63,7 @@ post "/callback" do
         # The answer mecanism is here!
         message = {
           type: "text",
-          text: bot_answer_to(event.message["text"])
+          text: bot_answer_to(event.message["text"], user_name)
         }
         client.reply_message(event["replyToken"], message)
 
