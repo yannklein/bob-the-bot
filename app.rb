@@ -23,11 +23,11 @@ def bot_answer_to(a_question, user_name)
   elsif a_question.match?(/how\s+.*are\s+.*you.*/i)
     "I am fine, " + user_name
   elsif a_question.match?(/.*le wagon.*/i)
-    "Wait " + user_name + "... you want to know about Le Wagon Kyoto!? These guys are just great!"
+    "Wait " + user_name + "... did you mean Le Wagon Kyoto!? These guys are just great!"
   elsif a_question.end_with?('?')
     "Good question, " + user_name + "!"
   else
-    ["I couldn't agree more", "Great to hear that", "Kinda make sense"].sample
+    ["I couldn't agree more.", "Great to hear that.", "Kinda make sense."].sample
   end
 end
 
