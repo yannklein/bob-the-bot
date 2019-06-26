@@ -1,5 +1,5 @@
 # LINE Bot 101
-下記のリンク先ドキュメントに従って進めるとIBM Watson, Amazon Rekognitionを使った画像認識BOTが作れます
+下記のリンク先ドキュメントに従って進めるとIBM Watsonを使った画像認識BOTが作れます
 
 ## Heroku
 https://scrapbox.io/xhack-ttl-workshops/Heroku%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9
@@ -12,12 +12,3 @@ https://scrapbox.io/xhack-ttl-workshops/LINE_Developers_%E3%82%A2%E3%82%AB%E3%82
 
 ## IBM Watson
 https://qiita.com/hidehiro98/items/e71c383e789b32a4104c
-
-## Amazon Rekognition
-https://paper.dropbox.com/doc/Amazon-RekognitionLINEBOT--ASxkg8u~uRyaSH6dtgdR53RcAQ-tkvkL6JKizaAP0gGcNU5t
-
-## Cloud Vision API | Google Cloud
-https://paper.dropbox.com/doc/Google-Cloud-LINEBOT--ATJZwQyGS3GIp1aCQBLhIh5uAQ-Ca0HKBej3ZfAFQLTBiGU3
-
-## Microsoft Azure
-https://www.notion.so/xhackttl/Microsoft-Azure-LINE-BOT-de8eeb29f511400eb0fc2fbd30f1dec7

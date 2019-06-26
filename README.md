@@ -1,3 +1,5 @@
+Built on the shoulder of giants, especially https://github.com/hidehiro98/
+
 # LINE Bot 101
 
 [日本語ドキュメント](README.ja.md)
