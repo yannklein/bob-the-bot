@@ -47,10 +47,16 @@ post "/callback" do
           p "#{response.code} #{response.body}"
         end
 
-        if event.message["text"] == "How are you?"
+        if event.message["text"].match?(/how\s+.*are\s+.*you.*/i)
           message = {
             type: "text",
             text: "I am fine, " + user_name
+          }
+          client.reply_message(event["replyToken"], message)
+        elsif event.message["text"].match?(/.*le wagon.*/i)
+          message = {
+            type: "text",
+            text: "Wait " + user_name + ", you want to know about Le Wagon Kyoto? These guys are great!"
           }
           client.reply_message(event["replyToken"], message)
         elsif event.message["text"].end_with?('?')
@@ -62,14 +68,14 @@ post "/callback" do
         else
           message = {
             type: "text",
-            text: event.message["text"] + ", " + user_name
+            text: "I couldn't agree more" + ", " + user_name
           }
-          p 'Im here!'
-          p event["replyToken"]
-          p message
-          p client
           client.reply_message(event["replyToken"], message)
         end
+        p 'One more message!'
+        p event["replyToken"]
+        p message
+        p client
 
       # when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
       when Line::Bot::Event::MessageType::Image
@@ -189,7 +195,7 @@ post "/callback" do
         # # Sending the results
         message = {
           type: "text",
-          text: image_result.to_s
+          text: "I think it remind me of a #{image_result[0]["class"]} thing or maybe.. #{image_result[1]["class"]} ?? or some words liek that... let say #{image_result[2]["class"]} am I right?"
         }
 
         client.reply_message(event["replyToken"], message)
