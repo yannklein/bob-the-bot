@@ -101,7 +101,7 @@ post "/callback" do
             images_file: images_file,
             threshold: "0.6"
           )
-          image_result = p classes.result["images"][0]["classifiers"][0]["classes"].to_s
+          image_result = p classes.result["images"][0]["classifiers"][0]["classes"]
         end
 
 
