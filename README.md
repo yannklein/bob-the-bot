@@ -18,7 +18,7 @@ If you do so, you cannnot create the provider nor the channel.
 ## Installation
 ```
 $ git clone https://github.com/yannklein/bob-the-bot.git
-$ cd line-bot-101
+$ cd [your code folder]
 $ git remote add heroku https://git.heroku.com/YOUR-APP-NAME-ON-HEROKU.git
 
 macOS
