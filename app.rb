@@ -111,7 +111,7 @@ post "/callback" do
         # # Sending the results
         message = {
           type: "text",
-          text: "I think it remind me of a #{image_result[0]["class"].capitalize} thing or maybe... #{image_result[1]["class"].capitalize}?? or some words like that... let say #{image_result[2]["class"].capitalize}, am I right?"
+          text: "I think it reminds me of a #{image_result[0]["class"].capitalize} thing or maybe... #{image_result[1]["class"].capitalize}?? or some words like that... let say #{image_result[2]["class"].capitalize}, am I right?"
         }
 
         client.reply_message(event["replyToken"], message)
