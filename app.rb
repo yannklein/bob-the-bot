@@ -40,8 +40,8 @@ def bot_jp_answer_to(a_question, user_name)
     "私は元気です、#{user_name}さん"
   elsif a_question.match?(/.*(le wagon|ワゴン|バゴン).*/i)
     "#{user_name}さん... もしかして京都のLE WAGONプログラミング学校の話ですかね？ 素敵な画っこと思います！"
-  elsif a_question.end_with?('?','？','か')
-    "いい質問ですね、#{user_nam}さん！"
+  elsif a_question.end_with?('?','？')
+    "いい質問ですね、#{user_name}さん！"
   else
     ["そうですね！", "確かに！", "間違い無いですね！"].sample
   end
