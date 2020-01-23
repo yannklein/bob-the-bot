@@ -11,16 +11,12 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
 - Heroku
 
-## NOTION!
+## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
 If you do so, you cannnot create the provider nor the channel.
 
-## Installation
+## Setting for people not having Heroku installed
 ```
-$ git clone https://github.com/yannklein/bob-the-bot.git
-$ cd [your code folder]
-$ git remote add heroku https://git.heroku.com/YOUR-APP-NAME-ON-HEROKU.git
-
 macOS
 If you don't have brew
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -29,12 +25,15 @@ $ brew install heroku/brew/heroku
 
 Ubuntu
 $ sudo snap install --classic heroku
+```
 
-$ git push heroku master
-
-Please ignore these lines
-$ brew install heroku/brew/heroku
+## Installation
+```
+$ git clone https://github.com/yannklein/bob-the-bot.git
+$ cd [your code folder]
 $ heroku create $YOUR_APP_NAME
+$ git remote add heroku https://git.heroku.com/YOUR-APP-NAME-ON-HEROKU.git
+$ git push heroku master
 
 $ heroku config:set LINE_CHANNEL_SECRET=$YOUR_LINE_CHANNEL_SECRET
 $ heroku config:set LINE_ACCESS_TOKEN=$YOUR_LINE_ACCESS_TOKEN
@@ -44,8 +43,6 @@ $ heroku config:set LINE_ACCESS_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93Qa
 
 Only for image recognition
 $ heroku config:set IBM_IAM_API_KEY=$YOUR_IAM_API_KEY
-
-$ git push heroku master
 ```
 
 ## Slides
