@@ -29,9 +29,9 @@ $ sudo snap install --classic heroku
 
 ## Installation
 ```
-$ git clone https://github.com/yannklein/bob-the-bot.git
-$ cd [your code folder]
-$ heroku create $YOUR_APP_NAME
+$ git clone https://github.com/yannklein/bob-the-bot.git [your-bot-name]
+$ cd [your-bot-name]
+$ heroku create [your-bot-name]
 $ git push heroku master
 
 $ heroku config:set LINE_CHANNEL_SECRET=$YOUR_LINE_CHANNEL_SECRET
