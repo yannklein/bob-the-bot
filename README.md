@@ -15,33 +15,64 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 DO NOT INCLUDE 'line' in the name of provider and channel.
 If you do so, you cannnot create the provider nor the channel.
 
-## Setting for people not having Heroku installed
+## Setup
+
+### MacOS
+#### Install Heroku
+If you don't have brew, do this first
 ```
-macOS
-If you don't have brew
-$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-Then
-$ brew install heroku/brew/heroku
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+Then do,
+```
+brew install heroku/brew/heroku
+```
+_Alternative option:_ install by dowloading [the Heroku Installer](https://devcenter.heroku.com/articles/heroku-cli#download-and-install).
+#### Install Git
+Download Git [here](https://git-scm.com/download/mac) and install it
+### Ubuntu
+#### Install Heroku
+```
+sudo snap install --classic heroku
+```
+#### Install Git
+```
+apt-get install git
+```
+### Windows
+#### Install Heroku
+Download [the Heroku Installer](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) and install it.
 
-Ubuntu
-$ sudo snap install --classic heroku
+#### Install Git
+Download Git [here](https://git-scm.com/download/win) and install it
+
+## Get the code up and running
+Open a terminal (search for "Terminal" (Mac, Ubuntu) or "Command Prompt" (Windows) in your OS search bar).
+
+We will dowload the bot code from Github, then we will push it to Heroku:
+```
+git clone https://github.com/yannklein/bob-the-bot.git [your-bot-name]
+cd [your-bot-name]
+heroku create [your-bot-name]
+git push heroku master
+```
+We will configure the keys to access the LINE API service:
+
+Replace `[YOUR_LINE_CHANNEL_SECRET]` and `[YOUR_LINE_ACCESS_TOKEN]` by your own keys.
+```
+heroku config:set LINE_CHANNEL_SECRET=[YOUR_LINE_CHANNEL_SECRET]
+heroku config:set LINE_ACCESS_TOKEN=[YOUR_LINE_ACCESS_TOKEN]
 ```
 
-## Installation
+_Example (do not copy/paste in your terminal):_
 ```
-$ git clone https://github.com/yannklein/bob-the-bot.git [your-bot-name]
-$ cd [your-bot-name]
-$ heroku create [your-bot-name]
-$ git push heroku master
+heroku config:set LINE_CHANNEL_SECRET=f73d5df3fagu3g301856e1dc4cfcf3e1
+heroku config:set LINE_ACCESS_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC7SsGpHP9K1EOOYkbwRThXHdVSSupJ4TgKMEtE/LbnE2heif2GZci+ntGdP89cGfrbLiofFFBlrFygi58f/B5UsvqkvlfNM7BHddRZhhV2RgdB04t89/1O/w1cDnyilFU=
+```
 
-$ heroku config:set LINE_CHANNEL_SECRET=$YOUR_LINE_CHANNEL_SECRET
-$ heroku config:set LINE_ACCESS_TOKEN=$YOUR_LINE_ACCESS_TOKEN
-Example
-$ heroku config:set LINE_CHANNEL_SECRET=f73d5df3fagu3g301856e1dc4cfcf3e1
-$ heroku config:set LINE_ACCESS_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC7SsGpHP9K1EOOYkbwRThXHdVSSupJ4TgKMEtE/LbnE2heif2GZci+ntGdP89cGfrbLiofFFBlrFygi58f/B5UsvqkvlfNM7BHddRZhhV2RgdB04t89/1O/w1cDnyilFU=
-
-Only for image recognition
-$ heroku config:set IBM_IAM_API_KEY=$YOUR_IAM_API_KEY
+Optional: we will set the key for Watson image recognition:
+```
+heroku config:set IBM_IAM_API_KEY=[YOUR_IAM_API_KEY]
 ```
 
 ## Slides
