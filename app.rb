@@ -68,6 +68,8 @@ post "/callback" do
 
   events = client.parse_events_from(body)
   events.each { |event|
+    p event
+    p event.class
     # Focus on the message events (including text, image, emoji, vocal.. messages)
     return if event != Line::Bot::Event::Message
 
