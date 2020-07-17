@@ -110,7 +110,7 @@ post "/callback" do
           threshold: "0.6"
         )
         image_results = classes.result["images"][0]["classifiers"][0]["classes"]
-        image_results = image_results.map {|result| result["class"].downcase}
+        image_results = image_results.map {|result| result["class"].upcase}
       end
       # Sending the image results
       send_bot_message(
