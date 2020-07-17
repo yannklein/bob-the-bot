@@ -33,7 +33,6 @@ def fetch_weather(message)
   report += "Except on #{other_weathers.map { |day| "#{day[0]}(#{day[1]})" }.join(", ")}.\n" if other_weathers.any?
   #tempreatures
   report += "\nThe temperature will be:\n#{weather_forcast.map {|day| " #{day[2].round}˚C for #{day[0]}"}.join("\n")}"
+  # Return an hash with the created weather fore_cast data
   {mostly: most_freq_weather, weather_forcast: weather_forcast, report: report}
 end
-
-p fetch_weather("What is the weather in Tokyo?")[:report]
