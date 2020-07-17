@@ -8,6 +8,7 @@ require "line/bot"
 
 require_relative "ibm_watson"
 require_relative "weather_api"
+require_relative "tokyo_events_api"
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -28,6 +29,8 @@ def bot_answer_to(a_question, user_name)
     "I am fine, " + user_name
   elsif a_question.include?("weather in")
     fetch_weather(a_question)[:report]
+  elsif a_question.match?(/event\s+.*in\s+.*tokyo.*/i)
+    fetch_tokyo_events
   elsif a_question.match?(/.*le wagon.*/i)
     "Wait " + user_name + "... did you mean Le Wagon Kyoto!? These guys are just great!"
   elsif a_question.end_with?('?')
