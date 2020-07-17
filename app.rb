@@ -60,6 +60,28 @@ def send_bot_message(message, client, event)
   p client
 end
 
+def fetch_ibm_watson(response_image)
+  tf = Tempfile.open
+  tf.write(response_image.body)
+  # Using IBM Watson visual recognition API
+  visual_recognition = VisualRecognitionV3.new(
+    version: "2018-03-19",
+    iam_apikey: ENV["IBM_IAM_API_KEY"]
+  )
+  image_results = ""
+  File.open(tf.path) do |images_file|
+    classes = visual_recognition.classify(
+      images_file: images_file,
+      threshold: "0.6"
+    )
+    image_results = classes.result["images"][0]["classifiers"][0]["classes"]
+    image_results = image_results.map {|result| result["class"].upcase}
+  end
+  # Do something with the image results
+  yield(image_results)
+  tf.unlink
+end
+
 post "/callback" do
   body = request.body.read
 
@@ -98,29 +120,14 @@ post "/callback" do
     # when receive an image message
     when Line::Bot::Event::MessageType::Image
       response_image = client.get_message_content(event.message["id"])
-      tf = Tempfile.open
-      tf.write(response_image.body)
-      # Using IBM Watson visual recognition API
-      visual_recognition = VisualRecognitionV3.new(
-        version: "2018-03-19",
-        iam_apikey: ENV["IBM_IAM_API_KEY"]
-      )
-      image_results = ""
-      File.open(tf.path) do |images_file|
-        classes = visual_recognition.classify(
-          images_file: images_file,
-          threshold: "0.6"
+      fetch_ibm_watson(response_image) do |image_results|
+        # Sending the image results
+        send_bot_message(
+          "Looking at that picture, the first words that come to me are #{image_results[0..1].join(", ")} and #{image_results[2]}. Am I correct?",
+          client,
+          event
         )
-        image_results = classes.result["images"][0]["classifiers"][0]["classes"]
-        image_results = image_results.map {|result| result["class"].upcase}
       end
-      # Sending the image results
-      send_bot_message(
-        "Looking at that picture, the first words that come to me are #{image_results[0..1].join(", ")} and #{image_results[2]}. Am I correct?",
-        client,
-        event
-      )
-      tf.unlink
     end
   }
 end
