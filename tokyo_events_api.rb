@@ -18,9 +18,9 @@ def fetch_tokyo_events
     week_events_hash[date] += "#{event['name']}\n"
   end
 
-  answer = "There are some cool events this week:"
+  answer = "There are some cool events this week:\n\n"
   week_events_hash.each do |key, value|
-    answer += "\n\n- #{key}\n#{value}"
+    answer += "- #{key}\n#{value}\n"
   end
   answer
 end
