@@ -41,4 +41,4 @@ def fetch_weather(message)
   {mostly: most_freq_weather, temps: temp_for, report: report}
 end
 
-p fetch_weather("What is the weather in Tokyo?")[:report]
+# p fetch_weather("What is the weather in Tokyo?")[:report]
