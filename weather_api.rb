@@ -28,11 +28,8 @@ def fetch_weather(message)
     weather_for << [days[index], day['weather'][0]['main']]
     temp_for << [days[index], day['temp']['day'] - 272.15]
   end
-  p weather_for
   freq = weather_for.map {|day| day[1]}.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
   most_freq_weather = freq.max_by{|k,v| v}[0]
-  p most_freq_weather
-  p temp_for
 
   # Report creation
   report = "The weather is mostly #{most_freq_weather} in #{location} for the next 4 days.\n"
@@ -44,4 +41,4 @@ def fetch_weather(message)
   {mostly: most_freq_weather, temps: temp_for, report: report}
 end
 
-p fetch_weather("What is the weather in Tokyo?")
+p fetch_weather("What is the weather in Tokyo?")[:report]
