@@ -80,6 +80,8 @@ post "/callback" do
       user_name = ""
       user_id = event["source"]["userId"]
       response = client.get_profile(user_id)
+      p response
+      p response.class
       if response.class == Net::HTTPSuccess
         contact = JSON.parse(response.body)
         p contact
