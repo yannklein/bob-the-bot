@@ -47,6 +47,17 @@ def bot_jp_answer_to(a_question, user_name)
   end
 end
 
+def send_bot_message(message, client, event)
+  message = { type: "text", text: message }
+  client.reply_message(event["replyToken"], message)
+
+  # Log prints
+  p 'Bot message sent!'
+  p event["replyToken"]
+  p message
+  p client
+end
+
 post "/callback" do
   body = request.body.read
 
@@ -57,68 +68,56 @@ post "/callback" do
 
   events = client.parse_events_from(body)
   events.each { |event|
-    case event
-    # Text recognition using REGEX and vanilla Ruby
-    when Line::Bot::Event::Message
-      case event.type
-      when Line::Bot::Event::MessageType::Text
-        p event
-        user_id = event["source"]["userId"]
-        user_name = ""
+    # Focus on the message events (including text, image, emoji, vocal.. messages)
+    return if event != Line::Bot::Event::Message
 
-        response = client.get_profile(user_id)
-        case response
-        when Net::HTTPSuccess then
-          contact = JSON.parse(response.body)
-          p contact
-          user_name = contact["displayName"]
-        else
-          p "#{response.code} #{response.body}"
-        end
-
-        # The answer mecanism is here!
-        message = {
-          type: "text",
-          text: bot_answer_to(event.message["text"], user_name)
-        }
-        client.reply_message(event["replyToken"], message)
-
-        p 'One more message!'
-        p event["replyToken"]
-        p message
-        p client
-
-      # Image recognition
-      when Line::Bot::Event::MessageType::Image
-        response_image = client.get_message_content(event.message["id"])
-        tf = Tempfile.open
-        tf.write(response_image.body)
-
-        # Using IBM Watson visual recognition API
-        visual_recognition = VisualRecognitionV3.new(
-          version: "2018-03-19",
-          iam_apikey: ENV["IBM_IAM_API_KEY"]
-        )
-
-        image_result = ""
-        File.open(tf.path) do |images_file|
-          classes = visual_recognition.classify(
-            images_file: images_file,
-            threshold: "0.6"
-          )
-          image_result = p classes.result["images"][0]["classifiers"][0]["classes"]
-        end
-        # # Sending the results
-        message = {
-          type: "text",
-          text: "I think it reminds me of a #{image_result[0]["class"].capitalize} thing or maybe... #{image_result[1]["class"].capitalize}?? or some words like that... let say #{image_result[2]["class"].capitalize}, am I right?"
-        }
-
-        client.reply_message(event["replyToken"], message)
-        tf.unlink
+    case event.type
+    # when receive a text message
+    when Line::Bot::Event::MessageType::Text
+      user_name = ""
+      user_id = event["source"]["userId"]
+      response = client.get_profile(user_id)
+      if response == Net::HTTPSuccess
+        contact = JSON.parse(response.body)
+        p contact
+        user_name = contact["displayName"]
+      else
+        # Can't retrieve the contact info
+        p "#{response.code} #{response.body}"
       end
+
+      # The answer mecanism is here!
+      send_bot_message(
+        bot_answer_to(event.message["text"], user_name),
+        client,
+        event
+      )
+    # when receive an image message
+    when Line::Bot::Event::MessageType::Image
+      response_image = client.get_message_content(event.message["id"])
+      tf = Tempfile.open
+      tf.write(response_image.body)
+      # Using IBM Watson visual recognition API
+      visual_recognition = VisualRecognitionV3.new(
+        version: "2018-03-19",
+        iam_apikey: ENV["IBM_IAM_API_KEY"]
+      )
+      image_results = ""
+      File.open(tf.path) do |images_file|
+        classes = visual_recognition.classify(
+          images_file: images_file,
+          threshold: "0.6"
+        )
+        image_results = classes.result["images"][0]["classifiers"][0]["classes"]
+        image_results = image_results.map {|result| result["class"].capitalize}
+      end
+      # Sending the image results
+      send_bot_message(
+        "Looking at that picture, the first words that come to me are #{image_results[0..-2].join(", ")} and #{image_results.last}.",
+        client,
+        event
+      )
+      tf.unlink
     end
   }
-
-  "OK"
 end
