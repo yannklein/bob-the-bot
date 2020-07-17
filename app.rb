@@ -7,6 +7,7 @@ require "tempfile"
 require "line/bot"
 
 require_relative "ibm_watson"
+require_relative "weather_api"
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -25,6 +26,8 @@ def bot_answer_to(a_question, user_name)
     bot_jp_answer_to(a_question, user_name)
   elsif a_question.match?(/how\s+.*are\s+.*you.*/i)
     "I am fine, " + user_name
+  elsif a_question.include?("weather in")
+    fetch_weather(a_question)['report']
   elsif a_question.match?(/.*le wagon.*/i)
     "Wait " + user_name + "... did you mean Le Wagon Kyoto!? These guys are just great!"
   elsif a_question.end_with?('?')
