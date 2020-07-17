@@ -110,11 +110,11 @@ post "/callback" do
           threshold: "0.6"
         )
         image_results = classes.result["images"][0]["classifiers"][0]["classes"]
-        image_results = image_results.map {|result| result["class"].capitalize}
+        image_results = image_results.map {|result| result["class"].downcase}
       end
       # Sending the image results
       send_bot_message(
-        "Looking at that picture, the first words that come to me are #{image_results[0..-2].join(", ")} and #{image_results.last}.",
+        "Looking at that picture, the first words that come to me are #{image_results[0..1].join(", ")} and #{image_results[2]}. Am I correct?",
         client,
         event
       )
