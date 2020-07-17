@@ -15,7 +15,7 @@ def fetch_tokyo_events
   week_events_hash = Hash.new("")
   week_events.each do |event|
     date = Date.parse(event['date']).strftime('%a, %b %e')
-    week_events_hash[date] += "#{event['name']}"
+    week_events_hash[date] += "#{event['name']}\n"
   end
 
   answer = "There are some cool events this week:"
