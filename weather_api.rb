@@ -32,12 +32,12 @@ def fetch_weather(message)
   most_freq_weather = freq.max_by{|k,v| v}[0]
 
   # Report creation
-  report = "The weather is mostly #{most_freq_weather.upcase} in #{location} for the next 4 days.\n\n"
+  report = "The weather is mostly #{most_freq_weather.upcase} in #{location} for the next 4 days.\n"
   # If there are particular weather days
   other_weathers = weather_for.reject { |day| day[1] == most_freq_weather}
   report += "Except on #{other_weathers.map { |day| "#{day[0]}(#{day[1]})" }.join(", ")}.\n" if other_weathers.any?
   #tempreatures
-  report += "The temperature will be:\n#{temp_for.map {|day| "- #{day[1].round}˚C for #{day[0]}"}.join("\n")}"
+  report += "\nThe temperature will be:\n#{temp_for.map {|day| "- #{day[1].round}˚C for #{day[0]}"}.join("\n")}"
   {mostly: most_freq_weather, temps: temp_for, report: report}
 end
 
