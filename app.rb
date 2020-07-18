@@ -22,7 +22,7 @@ def bot_answer_to(a_question, user_name)
   return "" unless a_question.downcase.include?("bob")
 
   if a_question.match?(/say (hello|hi) to/i)
-    "Hello #{a_question.match(/say (hello|hi) to (.+)\b/i)}[2]!!"
+    "Hello #{a_question.match(/say (hello|hi) to (.+)\b/i)[2]}!!"
   elsif a_question.match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello).*/i)
     "Hello " + user_name + ", how are you doing today?"
   elsif a_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
