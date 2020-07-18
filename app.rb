@@ -21,7 +21,9 @@ def bot_answer_to(a_question, user_name)
   # Only answer to messages with "bob"
   return "" unless a_question.downcase.include?("bob")
 
-  if a_question.match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello).*/i)
+  if a_question.match?(/say (hello|hi) to/i)
+    "Hello #{a_question.match(/say (hello|hi) to (.+)\b/i)}!!"
+  elsif a_question.match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello).*/i)
     "Hello " + user_name + ", how are you doing today?"
   elsif a_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
     bot_jp_answer_to(a_question, user_name)
@@ -32,7 +34,7 @@ def bot_answer_to(a_question, user_name)
   elsif a_question.match?(/event+.*in\s+.*tokyo.*/i)
     fetch_tokyo_events
   elsif a_question.match?(/.*le wagon.*/i)
-    "Wait " + user_name + "... did you mean Le Wagon Kyoto!? These guys are just great!"
+    "Wait " + user_name + "... did you mean Le Wagon Tokyo!? These guys are just great!"
   elsif a_question.end_with?('?')
     "Good question, " + user_name + "!"
   else
