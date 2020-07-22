@@ -53,17 +53,17 @@ Open a terminal (search for "Terminal" (Mac, Ubuntu) or "Command Prompt" (Window
 
 We will dowload the bot code from Github, then we will push it to Heroku:
 ```
-git clone https://github.com/yannklein/bob-the-bot.git [your-bot-name]
-cd [your-bot-name]
-heroku create [your-bot-name]
+git clone https://github.com/yannklein/bob-the-bot.git [CHANGE_THIS_TO_YOUR_BOT_NAME]
+cd [CHANGE_THIS_TO_YOUR_BOT_NAME]
+heroku create [CHANGE_THIS_TO_YOUR_BOT_NAME]
 git push heroku master
 ```
 We will configure the keys to access the LINE API service:
 
-Replace `[YOUR_LINE_CHANNEL_SECRET]` and `[YOUR_LINE_ACCESS_TOKEN]` by your own keys.
+Replace `[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]` and `[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]` by your own keys.
 ```
-heroku config:set LINE_CHANNEL_SECRET=[YOUR_LINE_CHANNEL_SECRET]
-heroku config:set LINE_ACCESS_TOKEN=[YOUR_LINE_ACCESS_TOKEN]
+heroku config:set LINE_CHANNEL_SECRET=[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]
+heroku config:set LINE_ACCESS_TOKEN=[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]
 ```
 
 _Example (do not copy/paste in your terminal):_
@@ -74,7 +74,7 @@ heroku config:set LINE_ACCESS_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC
 
 Optional: we will set the key for Watson image recognition:
 ```
-heroku config:set IBM_IAM_API_KEY=[YOUR_IAM_API_KEY]
+heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
 ```
 
 ## Slides
