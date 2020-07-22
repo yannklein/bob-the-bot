@@ -22,7 +22,7 @@ def fetch_weather(message)
   data = JSON.parse(data_serialized)['daily'][0..3]
 
   days = ["today", "tomorrow", (Date.today+ 2).strftime('%A'), (Date.today+ 3).strftime('%A')]
-  weather_forcast = data.map_with_index { |day, index| [days[index], day['weather'][0]['main'], day['temp']['day'] - 272.15] }
+  weather_forcast = data.map.with_index { |day, index| [days[index], day['weather'][0]['main'], day['temp']['day'] - 272.15] }
   freq = weather_forcast.map {|day| day[1]}.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
   most_freq_weather = freq.max_by{|k,v| v}[0]
 
