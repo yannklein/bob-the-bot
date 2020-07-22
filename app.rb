@@ -65,7 +65,7 @@ def send_bot_message(message, client, event)
   message = { type: 'text', text: message }
   p message
 
-  client.push_message(event['replyToken'], message)
+  client.reply_message(event['replyToken'], message)
 end
 
 post '/callback' do
