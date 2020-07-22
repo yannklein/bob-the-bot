@@ -63,7 +63,7 @@ def send_bot_message(message, client, event)
   # Log prints
   p 'Bot message sent!'
   p event["replyToken"]
-  p message
+  p message_hash
   p client
 end
 
