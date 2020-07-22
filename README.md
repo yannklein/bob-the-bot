@@ -53,7 +53,7 @@ Open a terminal (search for "Terminal" (Mac, Ubuntu) or "Command Prompt" (Window
 
 We will dowload the bot code from Github, then we will push it to Heroku:
 ```
-git clone https://github.com/yannklein/bob-the-bot.git [CHANGE_THIS_TO_YOUR_BOT_NAME]
+git clone https://github.com/lewagonjapan/bob-the-bot.git [CHANGE_THIS_TO_YOUR_BOT_NAME]
 cd [CHANGE_THIS_TO_YOUR_BOT_NAME]
 heroku create [CHANGE_THIS_TO_YOUR_BOT_NAME]
 git push heroku master
