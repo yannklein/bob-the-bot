@@ -97,14 +97,14 @@ post '/callback' do
       end
 
       if event.message['text'].downcase == 'hello, world'
-        # Sending a message when the bob tries to verify the webhook
+        # Sending a message when LINE tries to verify the webhook
         send_bot_message(
           'Everything is working!',
           client,
           event
         )
       else
-        # The answer mecanism is here!
+        # The answer mechanism is here!
         send_bot_message(
           bot_answer_to(event.message['text'], user_name),
           client,
