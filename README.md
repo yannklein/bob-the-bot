@@ -85,6 +85,14 @@ git add .
 git commit -m "DESCRIBE WHAT CHANGES YOU MADE"
 git push heroku master
 ```
+- When it's finished pushing, message you bot to test it out!
+
+## Have Errors?
+- In Terminal, you can run
+```
+heroku logs
+```
+- This will give you the server log. Big challenge to find that bug! 🐛
 
 ## Slides
 - This covers the Line configuration, step by step.
