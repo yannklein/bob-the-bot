@@ -38,7 +38,7 @@ def bot_answer_to(a_question, user_name)
   elsif a_question.end_with?('?')
     "Good question, #{user_name}!"
   else
-    ["I couldn't agree more.", 'Great to hear that.', 'Kinda make sense.'].sample
+    ["I couldn't agree more.", 'Great to hear that.', 'Interesting.'].sample
   end
 end
 
