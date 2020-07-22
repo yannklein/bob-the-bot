@@ -60,7 +60,7 @@ git push heroku master
 ```
 We will configure the keys to access the LINE API service:
 
-Replace `[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]` and `[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]` by your own keys.
+Replace `[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]` and `[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]` with your own keys.
 ```
 heroku config:set LINE_CHANNEL_SECRET=[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]
 heroku config:set LINE_ACCESS_TOKEN=[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]
