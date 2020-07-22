@@ -125,5 +125,6 @@ post '/callback' do
         )
       end
     end
+    'OK'
   end
 end
