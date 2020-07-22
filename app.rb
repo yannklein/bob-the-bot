@@ -66,6 +66,7 @@ def send_bot_message(message, client, event)
   p message
 
   client.reply_message(event['replyToken'], message)
+  'OK'
 end
 
 post '/callback' do
