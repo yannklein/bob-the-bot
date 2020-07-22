@@ -18,8 +18,8 @@ def client
 end
 
 def bot_answer_to(a_question, user_name)
-  # Only answer to messages with 'bob'
-  return '' unless a_question.downcase.include?('bob')
+  # If you want to add Bob to group chat, uncomment the next line
+  # return '' unless a_question.downcase.include?('bob') # Only answer to messages with 'bob'
 
   if a_question.match?(/say (hello|hi) to/i)
     "Hello #{a_question.match(/say (hello|hi) to (.+)\b/i)[2]}!!"
