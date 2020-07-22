@@ -11,10 +11,10 @@ require_relative 'weather_api'
 require_relative 'tokyo_events_api'
 
 def client
-  @client ||= Line::Bot::Client.new { |config|
+  @client ||= Line::Bot::Client.new do |config|
     config.channel_secret = ENV['LINE_CHANNEL_SECRET']
     config.channel_token = ENV['LINE_ACCESS_TOKEN']
-  }
+  end
 end
 
 def bot_answer_to(a_question, user_name)
