@@ -60,7 +60,7 @@ git push heroku master
 ```
 We will configure the keys to access the LINE API service:
 
-Replace `[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]` and `[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]` by your own keys.
+Replace `[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]` and `[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]` with your own keys.
 ```
 heroku config:set LINE_CHANNEL_SECRET=[CHANGE_THIS_TO_YOUR_LINE_CHANNEL_SECRET]
 heroku config:set LINE_ACCESS_TOKEN=[CHANGE_THIS_TO_YOUR_LINE_ACCESS_TOKEN]
@@ -76,6 +76,23 @@ Optional: we will set the key for Watson image recognition:
 ```
 heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
 ```
+## Ready to Upgrade? Making Changes to your Bot
+- Make your changes in your text editor 
+- You can [download Sublime Text](https://www.sublimetext.com/) if you don't have one.
+- Commit your changes and send them to Heroku:
+```
+git add .
+git commit -m "DESCRIBE WHAT CHANGES YOU MADE"
+git push heroku master
+```
+- When it's finished pushing, message you bot to test it out!
+
+## Have Errors?
+- In Terminal, you can run
+```
+heroku logs
+```
+- This will give you the server log. Big challenge to find that bug! 🐛
 
 ## Slides
 - This covers the Line configuration, step by step.
