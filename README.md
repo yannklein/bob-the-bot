@@ -78,8 +78,8 @@ heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
 ```
 
 ## Slides
-This covers the Line configuration, step by step.
-https://drive.google.com/file/d/19xu6O0Elt-ICBqCxoY0b_za16SaM4LZK/view?usp=sharing
+- This covers the Line configuration, step by step.
+- [Google Slides Link](https://drive.google.com/file/d/19xu6O0Elt-ICBqCxoY0b_za16SaM4LZK/view?usp=sharing)
 
 ## Docs
 ### Docs of LINE Messagin API
