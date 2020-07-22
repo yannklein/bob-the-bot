@@ -9,7 +9,7 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 
 ## What we use
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
-- [Heroku]|(https://www.heroku.com)
+- [Heroku](https://www.heroku.com)
 
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
