@@ -97,12 +97,21 @@ post '/callback' do
         p "#{response.code} #{response.body}"
       end
 
-      # The answer mechanism is here!
-      send_bot_message(
-        bot_answer_to(event.message['text'], user_name),
-        client,
-        event
-      )
+      if event.message['text'].downcase == 'hello, world'
+        # Sending a message when LINE tries to verify the webhook
+        send_bot_message(
+          'Everything is working!',
+          client,
+          event
+        )
+      else
+        # The answer mechanism is here!
+        send_bot_message(
+          bot_answer_to(event.message['text'], user_name),
+          client,
+          event
+        )
+      end
       # when receive an image message
     when Line::Bot::Event::MessageType::Image
       response_image = client.get_message_content(event.message['id'])
