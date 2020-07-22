@@ -9,7 +9,7 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 
 ## What we use
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
-- Heroku
+- [Heroku]|(https://www.heroku.com)
 
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
@@ -49,6 +49,8 @@ Download Git [here](https://git-scm.com/download/win) and install it
 ## Get the code up and running
 Open a terminal (search for "Terminal" (Mac, Ubuntu) or "Command Prompt" (Windows) in your OS search bar).
 
+*ANYTHING INSIDE OF [ ] NEEDS TO BE CHANGED*
+
 We will dowload the bot code from Github, then we will push it to Heroku:
 ```
 git clone https://github.com/yannklein/bob-the-bot.git [your-bot-name]
@@ -76,7 +78,8 @@ heroku config:set IBM_IAM_API_KEY=[YOUR_IAM_API_KEY]
 ```
 
 ## Slides
-https://www.slideshare.net/HidehiroNagaoka/le-wagon-tokyo-line-bot-101
+This covers the Line configuration, step by step.
+https://drive.google.com/file/d/19xu6O0Elt-ICBqCxoY0b_za16SaM4LZK/view?usp=sharing
 
 ## Docs
 ### Docs of LINE Messagin API
@@ -89,3 +92,8 @@ https://www.slideshare.net/HidehiroNagaoka/le-wagon-tokyo-line-bot-101
 ### Docs of IBM Watson
 - https://console.bluemix.net/apidocs/visual-recognition?language=ruby
 - https://console.bluemix.net/dashboard/apps
+
+## Contributors
+- [hidehiro98](https://github.com/hidehiro98/)
+- [yannklein](https://github.com/yannklein/)
+- [dmbf29](https://github.com/dmbf29/)
