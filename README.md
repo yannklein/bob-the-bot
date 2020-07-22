@@ -9,7 +9,7 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 
 ## What we use
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
-- [Heroku]|(https://www.heroku.com)
+- [Heroku](https://www.heroku.com)
 
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
@@ -79,7 +79,7 @@ heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
 
 ## Slides
 - This covers the Line configuration, step by step.
-- [Google Slides Link](https://drive.google.com/file/d/19xu6O0Elt-ICBqCxoY0b_za16SaM4LZK/view?usp=sharing)
+- [Google Slides Link](https://drive.google.com/file/d/1t-8rMmcXZhysGju5M8QdLvlGaXQPgZX6/view?usp=sharing)
 
 ## Docs
 ### Docs of LINE Messagin API
