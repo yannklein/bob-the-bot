@@ -76,6 +76,15 @@ Optional: we will set the key for Watson image recognition:
 ```
 heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
 ```
+## Ready to Upgrade? Making Changes to your Bot
+- Make your changes in your text editor 
+- You can [download Sublime Text](https://www.sublimetext.com/) if you don't have one.
+- Commit your changes and send them to Heroku:
+```
+git add .
+git commit -m "DESCRIBE WHAT CHANGES YOU MADE"
+git push heroku master
+```
 
 ## Slides
 - This covers the Line configuration, step by step.
