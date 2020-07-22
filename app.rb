@@ -37,6 +37,8 @@ def bot_answer_to(a_question, user_name)
     "Wait #{user_name}... did you mean Le Wagon Tokyo!? These guys are just great!"
   elsif a_question.end_with?('?')
     "Good question, #{user_name}!"
+  elsif a_question == a_question.upcase
+    "Whoa chill out, broseph... 😅🤙"
   else
     ["I couldn't agree more.", 'Great to hear that.', 'Interesting.'].sample
   end
