@@ -102,7 +102,6 @@ post "/callback" do
         client,
         event
       )
-      p "test point"
     # when receive an image message
     when Line::Bot::Event::MessageType::Image
       response_image = client.get_message_content(event.message["id"])
