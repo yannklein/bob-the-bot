@@ -57,14 +57,15 @@ def bot_jp_answer_to(a_question, user_name)
 end
 
 def send_bot_message(message, client, event)
-  message = { type: 'text', text: message }
-  client.reply_message(event['replyToken'], message)
-
   # Log prints
   p 'Bot message sent!'
   p event['replyToken']
-  p message
   p client
+
+  message = { type: 'text', text: message }
+  p message
+
+  client.push_message(event['replyToken'], message)
 end
 
 post '/callback' do
