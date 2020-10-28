@@ -118,7 +118,7 @@ post '/callback' do
       fetch_ibm_watson(response_image) do |image_results|
         # Sending the image results
         send_bot_message(
-          "Looking at that picture, the first words that come to me are #{image_results[0..1].join(', ')} and #{image_results[2]}. Am I correct?",
+          "Looking at that picture, the first words that come to me are #{image_results[0..1].join(', ')} and #{image_results[2]}. Pretty good, eh?",
           client,
           event
         )
