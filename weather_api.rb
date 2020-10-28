@@ -32,6 +32,6 @@ def fetch_weather(message)
   report += "Except on #{other_weathers.map { |day| "#{day[0]}(#{day[1]})" }.join(", ")}.\n" if other_weathers.any?
   # tempreatures
   report += "\nThe temperature will be:\n#{weather_forcast.map { |day| " #{day[2].round}˚C for #{day[0]}" }.join("\n")}"
-  # Return the strond from fore_cast data
+  # Return the string from fore_cast data
   return report
 end
