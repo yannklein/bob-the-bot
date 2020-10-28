@@ -24,7 +24,7 @@ def bot_answer_to(the_question, user_name)
   if the_question.downcase.include?('hello')
     # respond if a user says hello
     "Hello #{user_name}, how are you doing today?"
-  elsif answer.downcase.include?('eat')
+  elsif the_answer.downcase.include?('eat')
     ['sushi', 'tacos', 'hotpot', 'pad thai', 'kebab'].sample
   elsif the_question.downcase.include?('weather in')
     # call weather API in weather_api.rb
