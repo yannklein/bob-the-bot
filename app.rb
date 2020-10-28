@@ -27,10 +27,10 @@ def bot_answer_to(the_question, user_name)
   elsif the_question.end_with?('?')
     # respond if a user asks a question
     "Good question, #{user_name}!"
-  elsif the_question.include?('weather in')
+  elsif the_question.downcase.include?('weather in')
     # call weather API in weather_api.rb
     fetch_weather(the_question)
-  elsif the_question.include?('events')
+  elsif the_question.downcase.include?('events')
     # call events API in tokyo_events.rb
     fetch_tokyo_events
   elsif the_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
