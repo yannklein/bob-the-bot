@@ -11,6 +11,10 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 - [LINE Messaging API](https://developers.line.me/en/docs/messaging-api/)
 - [Heroku](https://www.heroku.com)
 
+## Slides
+- This covers the Line configuration, step by step.
+- [Google Slides Link](https://drive.google.com/file/d/19B-PxQKou0T3zaCSXR9aYsKoPJK-QgED/view?usp=sharing)
+
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
 If you do so, you cannnot create the provider nor the channel.
@@ -94,10 +98,6 @@ git push heroku master
 heroku logs
 ```
 - This will give you the server log. Big challenge to find that bug! 🐛
-
-## Slides
-- This covers the Line configuration, step by step.
-- [Google Slides Link](https://drive.google.com/file/d/1t-8rMmcXZhysGju5M8QdLvlGaXQPgZX6/view?usp=sharing)
 
 ## Docs
 ### Docs of LINE Messagin API
