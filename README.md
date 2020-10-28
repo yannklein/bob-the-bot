@@ -13,7 +13,7 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 
 ## Slides
 - This covers the Line configuration, step by step.
-- [Google Slides Link](https://drive.google.com/file/d/19B-PxQKou0T3zaCSXR9aYsKoPJK-QgED/view?usp=sharing)
+- [Google Slides Link](https://drive.google.com/file/d/1ceNPEcxkFPAE8G7pUmobR7Xv02zIUpKi/view?usp=sharing)
 
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
