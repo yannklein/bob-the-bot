@@ -33,5 +33,5 @@ def fetch_weather(message)
   # tempreatures
   report += "\nThe temperature will be:\n#{weather_forcast.map { |day| " #{day[2].round}˚C for #{day[0]}" }.join("\n")}"
   # Return an hash with the created weather fore_cast data
-  { mostly: most_freq_weather, weather_forcast: weather_forcast, report: report }
+  return report
 end
