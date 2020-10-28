@@ -17,41 +17,38 @@ def client
   end
 end
 
-def bot_answer_to(a_question, user_name)
+def bot_answer_to(the_question, user_name)
   # If you want to add Bob to group chat, uncomment the next line
-  # return '' unless a_question.downcase.include?('bob') # Only answer to messages with 'bob'
+  # return '' unless the_question.downcase.include?('bob') # Only answer to messages with 'bob'
 
-  if a_question.match?(/say (hello|hi) to/i)
-    "Hello #{a_question.match(/say (hello|hi) to (.+)\b/i)[2]}!!"
-  elsif a_question.match?(/(Hi|Hey|Bonjour|Hi there|Hey there|Hello).*/i)
+  if the_question.downcase.include?('hello')
+    # respond if a user says hello
     "Hello #{user_name}, how are you doing today?"
-  elsif a_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
-    bot_jp_answer_to(a_question, user_name)
-  elsif a_question.match?(/how\s+.*are\s+.*you.*/i)
-    "I am fine, #{user_name}"
-  elsif a_question.include?('weather in')
-    fetch_weather(a_question)[:report]
-  elsif a_question.match?(/event+.*in\s+.*tokyo.*/i)
-    fetch_tokyo_events
-  elsif a_question.match?(/.*le wagon.*/i)
-    "Wait #{user_name}... did you mean Le Wagon Tokyo!? These guys are just great!"
-  elsif a_question.end_with?('?')
+  elsif the_question.end_with?('?')
+    # respond if a user asks a question
     "Good question, #{user_name}!"
-  elsif a_question == a_question.upcase
-    "Whoa chill out, broseph... 😅🤙"
+  elsif the_question.include?('weather in')
+    # call weather API in weather_api.rb
+    fetch_weather(the_question)
+  elsif the_question.include?('events')
+    # call events API in tokyo_events.rb
+    fetch_tokyo_events
+  elsif the_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
+    # respond in japanese!
+    bot_jp_answer_to(the_question, user_name)
   else
     ["I couldn't agree more.", 'Great to hear that.', 'Interesting.'].sample
   end
 end
 
-def bot_jp_answer_to(a_question, user_name)
-  if a_question.match?(/(おはよう|こんにちは|こんばんは|ヤッホー|ハロー).*/)
+def bot_jp_answer_to(the_question, user_name)
+  if the_question.match?(/(おはよう|こんにちは|こんばんは|ヤッホー|ハロー).*/)
     "こんにちは#{user_name}さん！お元気ですか?"
-  elsif a_question.match?(/.*元気.*(？|\?｜か)/)
+  elsif the_question.match?(/.*元気.*(？|\?｜か)/)
     "私は元気です、#{user_name}さん"
-  elsif a_question.match?(/.*(le wagon|ワゴン|バゴン).*/i)
+  elsif the_question.match?(/.*(le wagon|ワゴン|バゴン).*/i)
     "#{user_name}さん... もしかして京都のLE WAGONプログラミング学校の話ですかね？ 素敵な画っこと思います！"
-  elsif a_question.end_with?('?','？')
+  elsif the_question.end_with?('?','？')
     "いい質問ですね、#{user_name}さん！"
   else
     ['そうですね！', '確かに！', '間違い無いですね！'].sample
