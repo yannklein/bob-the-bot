@@ -126,6 +126,9 @@ post '/callback' do
       p event.message['id']
       response_image = client.get_message_content(event.message['id'])
       p response_image
+      puts "Response body:"
+      p response_image.body
+      puts
       fetch_ibm_watson(response_image) do |image_results|
         # Sending the image results
         send_bot_message(
