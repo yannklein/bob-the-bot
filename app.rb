@@ -117,6 +117,7 @@ post '/callback' do
       # when receive an image message
     when Line::Bot::Event::MessageType::Image
       response_image = client.get_message_content(event.message['id'])
+      p response_image
       fetch_ibm_watson(response_image) do |image_results|
         # Sending the image results
         send_bot_message(
