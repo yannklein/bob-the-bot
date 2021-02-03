@@ -17,38 +17,40 @@ def client
   end
 end
 
-def bot_answer_to(the_question, user_name)
+def bot_answer_to(message, user_name)
   # If you want to add Bob to group chat, uncomment the next line
-  # return '' unless the_question.downcase.include?('bob') # Only answer to messages with 'bob'
+  # return '' unless message.downcase.include?('bob') # Only answer to messages with 'bob'
 
-  if the_question.downcase.include?('hello')
+  if message.downcase.include?('hello')
     # respond if a user says hello
     "Hello #{user_name}, how are you doing today?"
-  elsif the_question.end_with?('?')
-    # respond if a user asks a question
-    "Good question, #{user_name}!"
-  elsif the_question.downcase.include?('weather in')
+  elsif message.downcase.include?('eat')
+    ['sushi', 'tacos', 'curry', 'pad thai', 'kebab', 'spaghetti', 'burger'].sample
+  elsif message.downcase.include?('weather in')
     # call weather API in weather_api.rb
-    fetch_weather(the_question)
-  elsif the_question.downcase.include?('events')
+    fetch_weather(message)
+  elsif message.downcase.include?('events')
     # call events API in tokyo_events.rb
     fetch_tokyo_events
-  elsif the_question.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
+  elsif message.match?(/([\p{Hiragana}\p{Katakana}\p{Han}]+)/)
     # respond in japanese!
-    bot_jp_answer_to(the_question, user_name)
+    bot_jp_answer_to(message, user_name)
+  elsif message.end_with?('?')
+    # respond if a user asks a question
+    "Good question, #{user_name}!"
   else
     ["I couldn't agree more.", 'Great to hear that.', 'Interesting.'].sample
   end
 end
 
-def bot_jp_answer_to(the_question, user_name)
-  if the_question.match?(/(おはよう|こんにちは|こんばんは|ヤッホー|ハロー).*/)
+def bot_jp_answer_to(message, user_name)
+  if message.match?(/(おはよう|こんにちは|こんばんは|ヤッホー|ハロー).*/)
     "こんにちは#{user_name}さん！お元気ですか?"
-  elsif the_question.match?(/.*元気.*(？|\?｜か)/)
+  elsif message.match?(/.*元気.*(？|\?｜か)/)
     "私は元気です、#{user_name}さん"
-  elsif the_question.match?(/.*(le wagon|ワゴン|バゴン).*/i)
+  elsif message.match?(/.*(le wagon|ワゴン|バゴン).*/i)
     "#{user_name}さん... もしかして京都のLE WAGONプログラミング学校の話ですかね？ 素敵な画っこと思います！"
-  elsif the_question.end_with?('?','？')
+  elsif message.end_with?('?','？')
     "いい質問ですね、#{user_name}さん！"
   else
     ['そうですね！', '確かに！', '間違い無いですね！'].sample
@@ -56,7 +58,7 @@ def bot_jp_answer_to(the_question, user_name)
 end
 
 def send_bot_message(message, client, event)
-  # Log prints
+  # Log prints for debugging
   p 'Bot message sent!'
   p event['replyToken']
   p client
