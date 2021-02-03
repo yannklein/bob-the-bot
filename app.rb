@@ -116,19 +116,7 @@ post '/callback' do
       end
       # when receive an image message
     when Line::Bot::Event::MessageType::Image
-      puts
-      puts "Debuggin image here:"
-      puts
-      puts "Event:"
-      p event
-      puts
-      puts "Event message id"
-      p event.message['id']
       response_image = client.get_message_content(event.message['id'])
-      p response_image
-      puts "Response body:"
-      p response_image.body
-      puts
       fetch_ibm_watson(response_image) do |image_results|
         # Sending the image results
         send_bot_message(
