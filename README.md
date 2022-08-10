@@ -77,9 +77,16 @@ heroku config:set LINE_CHANNEL_SECRET=f73d5df3fagu3g301856e1dc4cfcf3e1
 heroku config:set LINE_ACCESS_TOKEN=FbKBF7cB1HReh9lIc6M3bDz8Rd6D+0f1kvBaJF93QadC7SsGpHP9K1EOOYkbwRThXHdVSSupJ4TgKMEtE/LbnE2heif2GZci+ntGdP89cGfrbLiofFFBlrFygi58f/B5UsvqkvlfNM7BHddRZhhV2RgdB04t89/1O/w1cDnyilFU=
 ```
 
-Optional: we will set the key for Watson image recognition:
+Optional: we will set the key for weather forecast and image recognition:
+
+Register and get the keys:
+- Weather forecast: https://home.openweathermap.org/api_keys
+- Image recognition: https://imagga.com/profile/dashboard
+
 ```
-heroku config:set IBM_IAM_API_KEY=[CHANGE_THIS_TO_YOUR_IAM_API_KEY]
+heroku config:set WEATHER_API=[CHANGE_THIS_TO_YOUR_WEATHER_API_KEY]
+heroku config:set IMAGGA_KEY=[CHANGE_THIS_TO_YOUR_IMAGGA_API_KEY]
+heroku config:set IMAGGA_SECRET=[CHANGE_THIS_TO_YOUR_IMAGGA_API_SECRET]
 ```
 ## Ready to Upgrade? Making Changes to your Bot
 - Make your changes in your text editor 
@@ -107,9 +114,11 @@ heroku logs
 ### Docs of Sinatra
 - https://devcenter.heroku.com/articles/rack#sinatra
 
-### Docs of IBM Watson
-- https://console.bluemix.net/apidocs/visual-recognition?language=ruby
-- https://console.bluemix.net/dashboard/apps
+### Docs of OpenWeather API
+- https://openweathermap.org/api
+
+### Docs of Imagga image recognition
+- https://docs.imagga.com/?ruby#getting-started
 
 ## Contributors
 - [hidehiro98](https://github.com/hidehiro98/)
