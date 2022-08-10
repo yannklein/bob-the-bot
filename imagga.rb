@@ -8,9 +8,9 @@ def fetch_imagga(response_image)
   image_results = ""
   File.open(tf.path) do |images_file|
     classes = get_classes(images_file)
+    yield(classes)
   end
   # Do something with the image results
-  yield(classes)
   tf.unlink
 end
 
