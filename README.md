@@ -13,7 +13,7 @@ Built on the shoulder of giants, especially https://github.com/hidehiro98/
 
 ## Slides
 - This covers the Line configuration, step by step.
-- [Google Slides Link](https://drive.google.com/file/d/1ceNPEcxkFPAE8G7pUmobR7Xv02zIUpKi/view?usp=sharing)
+- [Slides Link](line_chatbot_v3.pdf)
 
 ## CAUTION!
 DO NOT INCLUDE 'line' in the name of provider and channel.
