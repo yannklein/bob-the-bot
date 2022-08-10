@@ -90,7 +90,7 @@ heroku config:set IMAGGA_SECRET=[CHANGE_THIS_TO_YOUR_IMAGGA_API_SECRET]
 ```
 ## Ready to Upgrade? Making Changes to your Bot
 - Make your changes in your text editor 
-- You can [download Sublime Text](https://www.sublimetext.com/) if you don't have one.
+- You can download [ Sublime Text](https://www.sublimetext.com/) or [VS code](https://code.visualstudio.com/) if you don't have one.
 - Commit your changes and send them to Heroku:
 ```
 git add .
