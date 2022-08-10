@@ -6,7 +6,7 @@ require 'uri'
 require 'tempfile'
 require 'line/bot'
 
-require_relative 'ibm_watson'
+# require_relative 'ibm_watson'
 require_relative 'weather_api'
 require_relative 'tokyo_events_api'
 
@@ -116,15 +116,15 @@ post '/callback' do
       end
       # when receive an image message
     when Line::Bot::Event::MessageType::Image
-      response_image = client.get_message_content(event.message['id'])
-      fetch_ibm_watson(response_image) do |image_results|
-        # Sending the image results
-        send_bot_message(
-          "Looking at that picture, the first words that come to me are #{image_results[0..1].join(', ')} and #{image_results[2]}. Pretty good, eh?",
-          client,
-          event
-        )
-      end
+      # response_image = client.get_message_content(event.message['id'])
+      # fetch_ibm_watson(response_image) do |image_results|
+      #   # Sending the image results
+      #   send_bot_message(
+      #     "Looking at that picture, the first words that come to me are #{image_results[0..1].join(', ')} and #{image_results[2]}. Pretty good, eh?",
+      #     client,
+      #     event
+      #   )
+      # end
     end
   end
   'OK'
