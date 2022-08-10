@@ -15,8 +15,8 @@ def fetch_imagga(response_image)
 end
 
 def get_classes(images_file)
-  api_key = 'acc_45953c9c7f20ebe'
-  api_secret = 'd2108864cd8ef3f33208300d92e3ce05'
+  api_key = ENV["IMAGGA_KEY"]
+  api_secret = ENV["IMAGGA_SECRET"]
 
   auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
   response = RestClient.post "https://api.imagga.com/v2/uploads", { :image => images_file }, { :Authorization => auth }
