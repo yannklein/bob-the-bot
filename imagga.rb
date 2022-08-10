@@ -21,13 +21,13 @@ def get_classes(images_file)
   auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
   response = RestClient.post "https://api.imagga.com/v2/uploads", { :image => images_file }, { :Authorization => auth }
   response = JSON.parse(response)
-  p "Image uploda ID:", response
+  p "Image uploda ID:", response["result"]["upload_id"]
   image_upload_id = response["result"]["upload_id"]
 
   auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
   response = RestClient.get "https://api.imagga.com/v2/tags?image_upload_id=#{image_upload_id}", { :Authorization => auth }
   response = JSON.parse(response)
   classes = response["result"]["tags"].map { |tag| tag["tag"]["en"]}
-  p "Recognition result:", response
+  p "Recognition result:", classes
   classes
 end
