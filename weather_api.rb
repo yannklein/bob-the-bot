@@ -14,7 +14,7 @@ def fetch_weather(message)
   api_key = 'f5191f73c320e67df9461049016befe3'
   url = "https://api.openweathermap.org/data/2.5/onecall?lat=#{coord[0]}&lon=#{coord[1]}&exclude=current,minutely,hourly&appid=#{api_key}"
   begin
-    data_serialized = open(url).read
+    data_serialized = URI.open(url).read
   rescue OpenURI::HTTPError => e
     return { mostly: '', temps: '', report: 'No weather forecast for this city...' }
   end

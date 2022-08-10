@@ -5,7 +5,7 @@ require 'open-uri'
 def fetch_tokyo_events
   url = 'https://tokyo-events.herokuapp.com/api'
   begin
-    data_serialized = open(url).read
+    data_serialized = URI.open(url).read
   rescue OpenURI::HTTPError => e
     return 'No events found in Tokyo...'
   end
