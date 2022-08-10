@@ -70,6 +70,10 @@ def send_bot_message(message, client, event)
   'OK'
 end
 
+get '/' do
+  "Up and running!"
+end
+
 post '/callback' do
   body = request.body.read
 
